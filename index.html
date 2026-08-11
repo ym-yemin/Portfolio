@@ -1,0 +1,3456 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Ye Min | Offshore Wind & Renewable Energy</title>
+
+  <meta
+    name="description"
+    content="Portfolio and writing by Ye Min — Offshore Wind Energy Technical Analyst focused on renewable energy, power systems, policy and sustainability."
+  />
+
+  <meta name="theme-color" content="#0b0f14" />
+
+  <style>
+    /* =========================================================
+       DESIGN SYSTEM
+       ========================================================= */
+
+    :root {
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --surface-soft: #eef1f4;
+
+      --text: #121820;
+      --text-soft: #59636f;
+      --text-faint: #838d98;
+
+      --border: rgba(20, 30, 40, 0.1);
+      --border-strong: rgba(20, 30, 40, 0.18);
+
+      --accent: #087f6b;
+      --accent-hover: #006653;
+      --accent-soft: rgba(8, 127, 107, 0.1);
+
+      --nav-bg: rgba(246, 247, 249, 0.82);
+
+      --shadow:
+        0 1px 2px rgba(0, 0, 0, 0.03),
+        0 18px 55px rgba(25, 35, 45, 0.07);
+
+      --max-width: 1180px;
+      --article-width: 760px;
+
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 30px;
+
+      --transition: 180ms ease;
+    }
+
+    html[data-theme="dark"] {
+      --bg: #0b0f14;
+      --surface: #11171e;
+      --surface-soft: #161d25;
+
+      --text: #f1f5f4;
+      --text-soft: #9ba8a6;
+      --text-faint: #707d7d;
+
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.15);
+
+      --accent: #55d6b6;
+      --accent-hover: #78e2c7;
+      --accent-soft: rgba(85, 214, 182, 0.1);
+
+      --nav-bg: rgba(11, 15, 20, 0.82);
+
+      --shadow:
+        0 1px 2px rgba(0, 0, 0, 0.16),
+        0 20px 60px rgba(0, 0, 0, 0.24);
+    }
+
+    /* =========================================================
+       GLOBAL
+       ========================================================= */
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        ui-sans-serif,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+
+      transition:
+        background-color var(--transition),
+        color var(--transition);
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #07110f;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max-width));
+      margin-inline: auto;
+    }
+
+    section {
+      padding: 110px 0;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      margin: 0 0 15px;
+
+      color: var(--accent);
+
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+      content: "";
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+    }
+
+    h1 {
+      font-size: clamp(3.3rem, 8vw, 7.2rem);
+    }
+
+    h2 {
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+    }
+
+    h3 {
+      font-size: 1.35rem;
+    }
+
+    .muted {
+      color: var(--text-soft);
+    }
+
+    /* =========================================================
+       NAVIGATION
+       ========================================================= */
+
+    .site-header {
+      position: fixed;
+      z-index: 1000;
+
+      top: 0;
+      right: 0;
+      left: 0;
+
+      height: 74px;
+
+      border-bottom: 1px solid transparent;
+
+      background: var(--nav-bg);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      transition: border-color var(--transition);
+    }
+
+    .site-header.scrolled {
+      border-color: var(--border);
+    }
+
+    .nav {
+      display: flex;
+      height: 100%;
+
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      display: grid;
+
+      width: 34px;
+      height: 34px;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: var(--text);
+      color: var(--bg);
+
+      font-size: 0.77rem;
+      font-weight: 900;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: var(--text-soft);
+
+      font-size: 0.88rem;
+      font-weight: 650;
+
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+    }
+
+    .theme-toggle,
+    .menu-toggle {
+      display: grid;
+
+      width: 40px;
+      height: 40px;
+
+      place-items: center;
+
+      border: 1px solid var(--border);
+      border-radius: 50%;
+
+      background: var(--surface);
+      color: var(--text);
+
+      cursor: pointer;
+    }
+
+    .theme-toggle svg,
+    .menu-toggle svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .theme-toggle .moon {
+      display: none;
+    }
+
+    html[data-theme="light"] .theme-toggle .sun {
+      display: none;
+    }
+
+    html[data-theme="light"] .theme-toggle .moon {
+      display: block;
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+
+    /* =========================================================
+       BUTTONS
+       ========================================================= */
+
+    .button {
+      display: inline-flex;
+
+      min-height: 50px;
+
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+
+      padding: 0 21px;
+
+      border: 1px solid var(--border);
+      border-radius: 999px;
+
+      background: var(--surface);
+      color: var(--text);
+
+      font-size: 0.9rem;
+      font-weight: 750;
+
+      cursor: pointer;
+
+      transition:
+        transform var(--transition),
+        background-color var(--transition),
+        border-color var(--transition);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-strong);
+    }
+
+    .button-primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #071411;
+    }
+
+    .button-primary:hover {
+      border-color: var(--accent-hover);
+      background: var(--accent-hover);
+    }
+
+    .button svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero {
+      position: relative;
+
+      display: flex;
+
+      min-height: 100svh;
+
+      align-items: center;
+
+      overflow: hidden;
+
+      padding-top: 155px;
+      padding-bottom: 90px;
+
+      background:
+        radial-gradient(
+          circle at 75% 25%,
+          var(--accent-soft),
+          transparent 32%
+        );
+    }
+
+    .hero-grid {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1.35fr)
+        minmax(280px, 0.65fr);
+
+      gap: 75px;
+
+      align-items: end;
+    }
+
+    .hero-kicker {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      margin-bottom: 26px;
+
+      color: var(--text-soft);
+
+      font-size: 0.9rem;
+      font-weight: 650;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+
+      border-radius: 50%;
+
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      max-width: 900px;
+      margin-bottom: 28px;
+      font-weight: 760;
+    }
+
+    .hero h1 span {
+      color: var(--text-soft);
+    }
+
+    .hero-copy {
+      max-width: 680px;
+
+      margin-bottom: 36px;
+
+      color: var(--text-soft);
+
+      font-size: clamp(1.08rem, 2vw, 1.34rem);
+      line-height: 1.55;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-aside {
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+    }
+
+    .hero-aside-item {
+      margin-bottom: 26px;
+    }
+
+    .hero-aside-label {
+      margin-bottom: 6px;
+
+      color: var(--text-faint);
+
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-aside-value {
+      color: var(--text-soft);
+    }
+
+    /* =========================================================
+       SECTION HEADING
+       ========================================================= */
+
+    .section-heading {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 0.7fr)
+        minmax(300px, 1fr);
+
+      gap: 48px;
+
+      align-items: end;
+
+      margin-bottom: 55px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 0;
+    }
+
+    .section-intro {
+      max-width: 620px;
+
+      margin: 0;
+
+      color: var(--text-soft);
+
+      font-size: 1.08rem;
+    }
+
+    /* =========================================================
+       ABOUT
+       ========================================================= */
+
+    .about {
+      border-top: 1px solid var(--border);
+    }
+
+    .about-layout {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 0.8fr)
+        minmax(0, 1.2fr);
+
+      gap: 80px;
+
+      align-items: start;
+    }
+
+    .about-copy {
+      position: sticky;
+      top: 115px;
+    }
+
+    .about-copy p {
+      max-width: 440px;
+
+      color: var(--text-soft);
+
+      font-size: 1.06rem;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      color: var(--accent);
+
+      font-size: 0.88rem;
+      font-weight: 750;
+    }
+
+    .text-link svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .profile-list {
+      border-top: 1px solid var(--border);
+    }
+
+    .profile-row {
+      display: grid;
+
+      grid-template-columns: 130px 1fr;
+
+      gap: 30px;
+
+      padding: 28px 0;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .profile-label {
+      color: var(--text-faint);
+
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .profile-value {
+      font-size: 1.03rem;
+      font-weight: 560;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .tag {
+      padding: 8px 12px;
+
+      border: 1px solid var(--border);
+      border-radius: 999px;
+
+      background: var(--surface);
+      color: var(--text-soft);
+
+      font-size: 0.77rem;
+      font-weight: 650;
+    }
+
+    /* =========================================================
+       BLOG LIST
+       ========================================================= */
+
+    .blog {
+      border-top: 1px solid var(--border);
+
+      background:
+        linear-gradient(
+          180deg,
+          transparent,
+          color-mix(
+            in srgb,
+            var(--surface-soft) 35%,
+            transparent
+          )
+        );
+    }
+
+    .blog-controls {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+
+      margin-bottom: 32px;
+    }
+
+    .search-wrapper {
+      position: relative;
+
+      width: min(100%, 420px);
+    }
+
+    .search-wrapper svg {
+      position: absolute;
+
+      top: 50%;
+      left: 16px;
+
+      width: 17px;
+      height: 17px;
+
+      color: var(--text-faint);
+
+      transform: translateY(-50%);
+
+      pointer-events: none;
+    }
+
+    .blog-search {
+      width: 100%;
+      height: 48px;
+
+      padding: 0 16px 0 44px;
+
+      border: 1px solid var(--border);
+      border-radius: 999px;
+
+      outline: none;
+
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .blog-search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    .article-count {
+      color: var(--text-faint);
+
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .blog-grid {
+      display: grid;
+
+      grid-template-columns: repeat(12, 1fr);
+
+      gap: 18px;
+    }
+
+    .article-card {
+      position: relative;
+
+      display: flex;
+
+      grid-column: span 6;
+
+      min-height: 370px;
+
+      flex-direction: column;
+
+      overflow: hidden;
+
+      padding: 30px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+
+      background: var(--surface);
+
+      cursor: pointer;
+
+      transition:
+        transform 220ms ease,
+        border-color 220ms ease,
+        box-shadow 220ms ease;
+    }
+
+    .article-card:first-child {
+      grid-column: span 7;
+    }
+
+    .article-card:nth-child(2) {
+      grid-column: span 5;
+    }
+
+    .article-card:hover {
+      transform: translateY(-5px);
+
+      border-color: var(--border-strong);
+
+      box-shadow: var(--shadow);
+    }
+
+    .article-meta {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+
+      margin-bottom: 52px;
+
+      color: var(--text-faint);
+
+      font-size: 0.7rem;
+      font-weight: 750;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .article-category {
+      color: var(--accent);
+    }
+
+    .article-card h3 {
+      max-width: 570px;
+
+      margin-bottom: 18px;
+
+      font-size: clamp(1.45rem, 2.4vw, 2rem);
+    }
+
+    .article-card p {
+      max-width: 600px;
+
+      margin-bottom: 28px;
+
+      color: var(--text-soft);
+
+      font-size: 0.93rem;
+    }
+
+    .article-read {
+      display: inline-flex;
+
+      align-items: center;
+      gap: 8px;
+
+      margin-top: auto;
+
+      font-size: 0.84rem;
+      font-weight: 750;
+    }
+
+    .article-read svg {
+      width: 15px;
+      height: 15px;
+
+      color: var(--accent);
+
+      transition: transform var(--transition);
+    }
+
+    .article-card:hover .article-read svg {
+      transform: translateX(4px);
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+
+      padding: 60px 20px;
+
+      color: var(--text-soft);
+
+      text-align: center;
+
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    /* =========================================================
+       INTERNAL ARTICLE PAGE
+       ========================================================= */
+
+    .article-page {
+      min-height: 100vh;
+
+      padding-top: 145px;
+      padding-bottom: 90px;
+    }
+
+    .article-topbar {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+
+      margin-bottom: 75px;
+    }
+
+    .article-back,
+    .copy-link {
+      display: inline-flex;
+
+      align-items: center;
+      gap: 8px;
+
+      border: 0;
+
+      background: none;
+      color: var(--text-soft);
+
+      font-size: 0.82rem;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+    .article-back:hover,
+    .copy-link:hover {
+      color: var(--text);
+    }
+
+    .article-back svg,
+    .copy-link svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .article-header {
+      width: min(100%, 980px);
+
+      margin: 0 auto 60px;
+    }
+
+    .article-header-category {
+      margin-bottom: 18px;
+
+      color: var(--accent);
+
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .article-header h1 {
+      margin-bottom: 28px;
+
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      font-weight: 760;
+    }
+
+    .article-description {
+      max-width: 760px;
+
+      margin-bottom: 28px;
+
+      color: var(--text-soft);
+
+      font-size: clamp(1.08rem, 2vw, 1.3rem);
+    }
+
+    .article-info {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 10px 22px;
+
+      color: var(--text-faint);
+
+      font-size: 0.78rem;
+      font-weight: 650;
+    }
+
+    .article-divider {
+      width: min(100%, 980px);
+      height: 1px;
+
+      margin: 0 auto 60px;
+
+      background: var(--border);
+    }
+
+    .article-body {
+      width: min(100%, var(--article-width));
+
+      margin-inline: auto;
+
+      color: var(--text);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: clamp(1.05rem, 1.6vw, 1.16rem);
+      line-height: 1.88;
+    }
+
+    .article-body p {
+      margin-bottom: 1.6em;
+    }
+
+    .article-body h2 {
+      margin-top: 2.2em;
+      margin-bottom: 0.75em;
+
+      font-family:
+        Inter,
+        ui-sans-serif,
+        sans-serif;
+
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+    }
+
+    .article-body h3 {
+      margin-top: 2em;
+      margin-bottom: 0.7em;
+
+      font-family:
+        Inter,
+        ui-sans-serif,
+        sans-serif;
+
+      font-size: 1.35rem;
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin: 0 0 1.8em;
+      padding-left: 1.5em;
+    }
+
+    .article-body li {
+      margin-bottom: 0.55em;
+    }
+
+    .article-body strong {
+      color: var(--text);
+    }
+
+    .article-body blockquote {
+      margin: 2.2em 0;
+      padding: 4px 0 4px 24px;
+
+      border-left: 3px solid var(--accent);
+
+      color: var(--text-soft);
+
+      font-size: 1.15em;
+      font-style: italic;
+    }
+
+    .article-footer {
+      width: min(100%, 980px);
+
+      margin: 85px auto 0;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .article-navigation {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 1px;
+
+      background: var(--border);
+    }
+
+    .article-nav-card {
+      min-height: 160px;
+
+      padding: 28px;
+
+      background: var(--bg);
+
+      cursor: pointer;
+    }
+
+    .article-nav-card:hover {
+      background: var(--surface);
+    }
+
+    .article-nav-label {
+      margin-bottom: 10px;
+
+      color: var(--text-faint);
+
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .article-nav-title {
+      max-width: 380px;
+
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    /* =========================================================
+       CONTACT
+       ========================================================= */
+
+    .contact {
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-layout {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 0.75fr)
+        minmax(340px, 1fr);
+
+      gap: 80px;
+    }
+
+    .contact-copy h2 {
+      margin-bottom: 25px;
+    }
+
+    .contact-copy p {
+      max-width: 440px;
+
+      color: var(--text-soft);
+
+      font-size: 1.05rem;
+    }
+
+    .contact-form {
+      padding: 36px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+
+      background: var(--surface);
+
+      box-shadow: var(--shadow);
+    }
+
+    .field-row {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 16px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .field label {
+      display: block;
+
+      margin-bottom: 8px;
+
+      color: var(--text-soft);
+
+      font-size: 0.76rem;
+      font-weight: 750;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+
+      outline: none;
+
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .field input {
+      height: 51px;
+      padding: 0 15px;
+    }
+
+    .field textarea {
+      min-height: 145px;
+
+      padding: 14px 15px;
+
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    .contact-form .button {
+      width: 100%;
+    }
+
+    .form-status {
+      display: none;
+
+      margin-top: 14px;
+      padding: 12px 14px;
+
+      border-radius: var(--radius-sm);
+
+      background: var(--accent-soft);
+      color: var(--text-soft);
+
+      font-size: 0.82rem;
+    }
+
+    .form-status.visible {
+      display: block;
+    }
+
+    .contact-note {
+      margin: 14px 0 0;
+
+      color: var(--text-faint);
+
+      font-size: 0.74rem;
+      text-align: center;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    footer {
+      padding: 28px 0;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+
+      color: var(--text-faint);
+
+      font-size: 0.76rem;
+    }
+
+    /* =========================================================
+       ANIMATION
+       ========================================================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+
+      transition:
+        opacity 600ms ease,
+        transform 600ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 920px) {
+      section {
+        padding: 85px 0;
+      }
+
+      .section-heading {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .hero {
+        min-height: auto;
+
+        padding-top: 165px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 65px;
+      }
+
+      .hero-aside {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 25px;
+      }
+
+      .about-layout,
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 55px;
+      }
+
+      .about-copy {
+        position: static;
+      }
+
+      .article-card:first-child,
+      .article-card:nth-child(2),
+      .article-card {
+        grid-column: span 6;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        width: min(calc(100% - 28px), var(--max-width));
+      }
+
+      .nav-right {
+        gap: 9px;
+      }
+
+      .menu-toggle {
+        display: grid;
+      }
+
+      .nav-links {
+        position: fixed;
+
+        top: 73px;
+        right: 0;
+        left: 0;
+
+        display: grid;
+
+        gap: 0;
+
+        padding: 16px 20px 28px;
+
+        border-bottom: 1px solid var(--border);
+
+        background: var(--bg);
+
+        opacity: 0;
+        pointer-events: none;
+
+        transform: translateY(-12px);
+
+        transition:
+          opacity var(--transition),
+          transform var(--transition);
+      }
+
+      .nav-links.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+      }
+
+      .nav-links a {
+        padding: 16px 4px;
+
+        border-bottom: 1px solid var(--border);
+
+        font-size: 1rem;
+      }
+
+      .hero {
+        padding-top: 140px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 15vw, 5.4rem);
+      }
+
+      .hero-aside {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-row {
+        grid-template-columns: 1fr;
+        gap: 9px;
+      }
+
+      .blog-controls {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .search-wrapper {
+        width: 100%;
+      }
+
+      .article-card:first-child,
+      .article-card:nth-child(2),
+      .article-card {
+        grid-column: 1 / -1;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .contact-form {
+        padding: 24px 18px;
+      }
+
+      .article-page {
+        padding-top: 120px;
+      }
+
+      .article-topbar {
+        margin-bottom: 50px;
+      }
+
+      .article-navigation {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =======================================================
+       NAVIGATION
+       ======================================================= -->
+
+  <header class="site-header" id="siteHeader">
+    <nav class="nav container">
+      <a href="#home" class="brand" id="brandLink">
+        <span class="brand-mark">YM</span>
+        <span>Ye Min</span>
+      </a>
+
+      <div class="nav-right">
+
+        <div class="nav-links" id="navLinks">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#blog">Blog</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Switch theme"
+        >
+          <svg
+            class="sun"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="12" cy="12" r="4"></circle>
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            ></path>
+          </svg>
+
+          <svg
+            class="moon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path
+              d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"
+            ></path>
+          </svg>
+        </button>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="Open menu"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M4 8h16M4 16h16"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- =======================================================
+       NORMAL PORTFOLIO
+       ======================================================= -->
+
+  <main id="portfolio">
+
+    <!-- HOME -->
+
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-grid">
+
+          <div>
+            <div class="hero-kicker reveal">
+              <span class="status-dot"></span>
+              Offshore wind · Renewable energy · Tokyo
+            </div>
+
+            <h1 class="reveal">
+              Building a
+              <span>cleaner energy</span>
+              future.
+            </h1>
+
+            <p class="hero-copy reveal">
+              I'm Ye Min, an Offshore Wind Energy Technical Analyst
+              working at the intersection of wind energy, power systems,
+              renewable-energy policy and sustainable development.
+            </p>
+
+            <div class="hero-actions reveal">
+              <a href="#blog" class="button button-primary">
+                Read my writing
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6"></path>
+                </svg>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/yeminn/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="button"
+              >
+                LinkedIn
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M7 17 17 7M8 7h9v9"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <aside class="hero-aside reveal">
+            <div class="hero-aside-item">
+              <div class="hero-aside-label">Current focus</div>
+              <div class="hero-aside-value">
+                Offshore Wind Energy
+              </div>
+            </div>
+
+            <div class="hero-aside-item">
+              <div class="hero-aside-label">Role</div>
+              <div class="hero-aside-value">
+                Technical Analyst
+              </div>
+            </div>
+
+            <div class="hero-aside-item">
+              <div class="hero-aside-label">Based in</div>
+              <div class="hero-aside-value">
+                Greater Tokyo, Japan
+              </div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section class="about" id="about">
+      <div class="container">
+
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow">01 / About</div>
+            <h2>Energy systems with purpose.</h2>
+          </div>
+
+          <p class="section-intro">
+            My work and writing explore how technology, policy and
+            thoughtful system design can accelerate the transition toward
+            reliable, affordable and sustainable energy.
+          </p>
+        </div>
+
+        <div class="about-layout">
+
+          <div class="about-copy reveal">
+            <p>
+              I am a renewable-energy professional currently working as
+              an Offshore Wind Energy Technical Analyst at SSE Pacifico K.K.
+            </p>
+
+            <p>
+              My academic journey includes graduate study at Kyoto
+              University and the University of Malaya. My interests span
+              renewable-energy systems, offshore wind, electricity markets,
+              grid integration and energy policy.
+            </p>
+
+            <p>
+              I also write about technologies, policies and broader
+              sustainability questions surrounding the global energy
+              transition.
+            </p>
+
+            <a
+              class="text-link"
+              href="https://www.linkedin.com/in/yeminn/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View LinkedIn profile
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M7 17 17 7M8 7h9v9"></path>
+              </svg>
+            </a>
+          </div>
+
+          <div class="profile-list reveal">
+
+            <div class="profile-row">
+              <div class="profile-label">Profession</div>
+              <div class="profile-value">
+                Offshore Wind Energy Technical Analyst
+              </div>
+            </div>
+
+            <div class="profile-row">
+              <div class="profile-label">Organization</div>
+              <div class="profile-value">
+                SSE Pacifico K.K.
+              </div>
+            </div>
+
+            <div class="profile-row">
+              <div class="profile-label">Education</div>
+              <div class="profile-value">
+                Kyoto University & University of Malaya
+              </div>
+            </div>
+
+            <div class="profile-row">
+              <div class="profile-label">Location</div>
+              <div class="profile-value">
+                Greater Tokyo Area, Japan
+              </div>
+            </div>
+
+            <div class="profile-row">
+              <div class="profile-label">Interests</div>
+
+              <div class="tags">
+                <span class="tag">Offshore Wind</span>
+                <span class="tag">Renewable Energy</span>
+                <span class="tag">Energy Policy</span>
+                <span class="tag">Power Systems</span>
+                <span class="tag">Grid Integration</span>
+                <span class="tag">Sustainability</span>
+                <span class="tag">Energy Transition</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- BLOG -->
+
+    <section class="blog" id="blog">
+      <div class="container">
+
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow">02 / Blog</div>
+            <h2>Ideas on energy & sustainability.</h2>
+          </div>
+
+          <p class="section-intro">
+            Notes and longer-form writing about offshore wind,
+            renewable-energy systems, electricity markets,
+            energy policy and sustainability.
+          </p>
+        </div>
+
+        <div class="blog-controls reveal">
+
+          <div class="search-wrapper">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-3.5-3.5"></path>
+            </svg>
+
+            <input
+              type="search"
+              id="blogSearch"
+              class="blog-search"
+              placeholder="Search articles..."
+              aria-label="Search articles"
+            />
+          </div>
+
+          <div class="article-count" id="articleCount"></div>
+        </div>
+
+        <!-- Cards are generated automatically -->
+        <div class="blog-grid" id="blogGrid"></div>
+
+      </div>
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section class="contact" id="contact">
+      <div class="container">
+
+        <div class="contact-layout">
+
+          <div class="contact-copy reveal">
+            <div class="eyebrow">03 / Contact</div>
+
+            <h2>Let's start a conversation.</h2>
+
+            <p>
+              Interested in offshore wind, renewable energy,
+              energy systems or related collaboration?
+              Send me a message or connect with me on LinkedIn.
+            </p>
+
+            <a
+              href="https://www.linkedin.com/in/yeminn/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="button"
+            >
+              Connect on LinkedIn
+            </a>
+          </div>
+
+          <form class="contact-form reveal" id="contactForm">
+
+            <div class="field-row">
+
+              <div class="field">
+                <label for="name">Your name</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  autocomplete="name"
+                  placeholder="Jane Smith"
+                />
+              </div>
+
+              <div class="field">
+                <label for="email">Your email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  autocomplete="email"
+                  placeholder="jane@example.com"
+                />
+              </div>
+
+            </div>
+
+            <div class="field">
+              <label for="subject">Subject</label>
+              <input
+                id="subject"
+                name="subject"
+                type="text"
+                required
+                placeholder="Offshore wind collaboration"
+              />
+            </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                placeholder="Tell me what you'd like to discuss..."
+              ></textarea>
+            </div>
+
+            <button type="submit" class="button button-primary">
+              Prepare message
+            </button>
+
+            <div
+              class="form-status"
+              id="formStatus"
+              role="status"
+            ></div>
+
+            <p class="contact-note">
+              Add your public email address to CONTACT_EMAIL in
+              the JavaScript to enable direct email composition.
+            </p>
+
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       INTERNAL BLOG ARTICLE VIEW
+
+       JavaScript fills this automatically.
+       ======================================================= -->
+
+  <main id="articlePage" class="article-page hidden">
+
+    <div class="container">
+
+      <div class="article-topbar">
+
+        <button class="article-back" id="backToBlog">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M19 12H5M11 18l-6-6 6-6"></path>
+          </svg>
+          All articles
+        </button>
+
+        <button class="copy-link" id="copyArticleLink">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.1 1.1"
+            ></path>
+            <path
+              d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1.1-1.1"
+            ></path>
+          </svg>
+
+          <span id="copyText">Copy link</span>
+        </button>
+
+      </div>
+
+      <article>
+
+        <header class="article-header">
+
+          <div
+            class="article-header-category"
+            id="articleCategory"
+          ></div>
+
+          <h1 id="articleTitle"></h1>
+
+          <p
+            class="article-description"
+            id="articleDescription"
+          ></p>
+
+          <div class="article-info">
+            <span id="articleDate"></span>
+            <span>Ye Min</span>
+            <span id="articleReadingTime"></span>
+          </div>
+
+        </header>
+
+        <div class="article-divider"></div>
+
+        <div
+          class="article-body"
+          id="articleBody"
+        ></div>
+
+        <footer class="article-footer">
+          <div
+            class="article-navigation"
+            id="articleNavigation"
+          ></div>
+        </footer>
+
+      </article>
+
+    </div>
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
+  <footer>
+    <div class="container footer-inner">
+
+      <span>
+        © <span id="year"></span> Ye Min.
+      </span>
+
+      <a href="#home">
+        Back to top ↑
+      </a>
+
+    </div>
+  </footer>
+
+
+  <script>
+    /* =========================================================
+       CONTACT CONFIGURATION
+
+       Add the email address you want visitors to contact.
+
+       Example:
+
+       const CONTACT_EMAIL = "hello@yemin.com";
+
+       Leave blank and the message will be copied instead.
+       ========================================================= */
+
+    const CONTACT_EMAIL = "";
+
+
+    /* =========================================================
+       BLOG POSTS
+
+       THIS IS WHERE YOU WRITE YOUR BLOG.
+
+       To publish a new post:
+
+       1. Copy one post object.
+       2. Change slug, title, date, category, description.
+       3. Write your article inside content.
+       4. Save index.html.
+       5. Upload the updated file to your website.
+
+       New posts automatically appear in the Blog section.
+
+       IMPORTANT:
+       - slug should be lowercase
+       - use hyphens instead of spaces
+       - every slug must be unique
+
+       Example:
+
+       {
+         slug: "japan-offshore-wind",
+         title: "Thoughts on Japan's Offshore Wind Future",
+         date: "2026-09-01",
+         category: "Offshore Wind",
+         description: "My observations on Japan's offshore wind market.",
+         content: `
+           <p>Introduction...</p>
+
+           <h2>Current situation</h2>
+
+           <p>Your article...</p>
+
+           <h2>What comes next?</h2>
+
+           <p>Your conclusion...</p>
+         `
+       }
+
+       ========================================================= */
+
+
+    const BLOG_POSTS = [
+
+      /* =======================================================
+         POST 1
+         ======================================================= */
+
+      {
+        slug: "feed-in-tariff-wind-energy",
+
+        title:
+          "A Comprehensive Review on Feed-in Tariff System for Wind Energy",
+
+        date: "2022-08-10",
+
+        category: "Wind · Policy",
+
+        description:
+          "A review of feed-in tariff design for wind energy and the role policy can play in supporting renewable-energy investment.",
+
+        content: `
+          <p>
+            Governments use a range of mechanisms to encourage
+            renewable-energy investment. These include renewable
+            portfolio standards, certificates, auctions, tax incentives,
+            subsidies and feed-in tariffs.
+          </p>
+
+          <p>
+            Among these approaches, the feed-in tariff has historically
+            played an important role in the early growth of wind-energy
+            markets. A well-designed tariff can reduce investment
+            uncertainty by establishing predictable revenue for a project
+            over a defined period.
+          </p>
+
+          <h2>What makes a feed-in tariff effective?</h2>
+
+          <p>
+            Three elements are especially important: an appropriate
+            payment level, a sufficiently long purchase agreement and
+            reliable access to the electricity grid.
+          </p>
+
+          <p>
+            Tariff design must balance two competing goals. Payments
+            should be high enough to make renewable projects investable,
+            but they should not generate excessive returns or encourage
+            inefficient development.
+          </p>
+
+          <h2>Fixed and premium models</h2>
+
+          <p>
+            Feed-in mechanisms can broadly be separated into fixed-price
+            and market-related premium systems. A fixed tariff gives
+            generators predictable revenue, while premium models expose
+            projects to a greater degree of electricity-market price risk.
+          </p>
+
+          <p>
+            Tariff degression can also be used. Under this approach,
+            support for new installations gradually declines as the
+            technology matures and costs fall. Done carefully, this can
+            encourage innovation while protecting investors from sudden
+            policy changes.
+          </p>
+
+          <h2>Different markets need different designs</h2>
+
+          <p>
+            Wind resources, project sizes, financing conditions and
+            electricity-market structures vary widely between countries.
+            This means there is no single tariff design that works
+            everywhere.
+          </p>
+
+          <p>
+            Germany, France, China and Thailand provide useful examples
+            of how feed-in policies have been adapted to local
+            circumstances. Designs have included resource-based tariffs,
+            long-term fixed prices, premiums and differentiation between
+            regions or project characteristics.
+          </p>
+
+          <h2>Policy should evolve with technology</h2>
+
+          <p>
+            As wind technology becomes more competitive, policy design
+            needs to evolve as well. Support should be predictable enough
+            to reduce investment risk while remaining flexible enough to
+            respond to falling technology costs and changing market
+            conditions.
+          </p>
+
+          <p>
+            The central lesson is that policy effectiveness depends less
+            on simply offering a high subsidy and more on creating a
+            stable, transparent and well-designed investment framework.
+          </p>
+        `
+      },
+
+
+      /* =======================================================
+         POST 2
+         ======================================================= */
+
+      {
+        slug: "renewable-energy-critical-minerals",
+
+        title:
+          "Renewables Are Not as Truly Sustainable as You Might Think",
+
+        date: "2022-03-18",
+
+        category: "Sustainability",
+
+        description:
+          "The renewable-energy transition also creates growing demand for critical minerals, raising questions about supply security and sustainability.",
+
+        content: `
+          <p>
+            The global energy transition is shifting electricity,
+            transport and industry away from fossil fuels and toward
+            technologies such as wind, solar, batteries and electric
+            vehicles.
+          </p>
+
+          <p>
+            These technologies greatly reduce operational carbon
+            emissions, but they are also highly dependent on physical
+            materials. Lithium, nickel, cobalt, graphite, copper and rare
+            earth elements are increasingly important components of
+            clean-energy infrastructure.
+          </p>
+
+          <h2>The material side of clean energy</h2>
+
+          <p>
+            Batteries depend on several critical minerals for energy
+            density, performance and durability. Permanent-magnet wind
+            turbines and electric motors can require rare earth elements.
+            Electricity grids require significant quantities of copper
+            and aluminium.
+          </p>
+
+          <p>
+            As renewable-energy deployment accelerates, demand for these
+            materials is also expected to grow.
+          </p>
+
+          <h2>Environmental impacts do not disappear</h2>
+
+          <p>
+            Clean-energy technologies move many environmental impacts
+            away from fuel combustion, but they do not eliminate them.
+            Mining and mineral processing can require substantial water,
+            energy and land resources and may create environmental
+            impacts if poorly managed.
+          </p>
+
+          <p>
+            This means sustainability should be considered across the
+            complete technology life cycle rather than only during
+            electricity generation.
+          </p>
+
+          <h2>Supply concentration is another risk</h2>
+
+          <p>
+            Some important minerals are produced or processed in a small
+            number of countries. Concentrated supply chains can introduce
+            geopolitical and energy-security risks as global demand
+            increases.
+          </p>
+
+          <h2>Innovation can reduce the problem</h2>
+
+          <p>
+            Several strategies can improve the resilience and
+            sustainability of clean-energy technologies:
+          </p>
+
+          <ul>
+            <li>reducing material intensity through better engineering,</li>
+            <li>developing alternative materials and technologies,</li>
+            <li>improving recycling and circular-economy systems,</li>
+            <li>diversifying mineral supply chains, and</li>
+            <li>improving environmental standards for extraction.</li>
+          </ul>
+
+          <p>
+            Renewable energy remains essential to decarbonization.
+            However, a genuinely sustainable transition needs to consider
+            not only the energy produced by a technology, but also the
+            resources required to build it.
+          </p>
+        `
+      },
+
+
+      /* =======================================================
+         POST 3
+         ======================================================= */
+
+      {
+        slug: "zero-marginal-cost-power-plants",
+
+        title:
+          "Social Impact of Information Technology-based Zero Marginal Cost Power Plants",
+
+        date: "2022-02-21",
+
+        category: "Digital Energy",
+
+        description:
+          "How digitalization, distributed energy and peer-to-peer electricity systems could reshape the relationship between consumers and the power system.",
+
+        content: `
+          <p>
+            Increasing the share of wind and solar power requires a
+            transformation of the electricity system. Renewable
+            generation is variable, so maintaining the balance between
+            electricity supply and demand requires greater flexibility.
+          </p>
+
+          <p>
+            Dispatchable generation, energy storage, stronger networks
+            and demand-side management can all provide this flexibility.
+            Increasingly, these resources are connected through digital
+            technologies.
+          </p>
+
+          <h2>From electricity grid to energy internet</h2>
+
+          <p>
+            Sensors, software, smart meters and communication networks
+            allow enormous amounts of information to be collected and
+            processed throughout the power system.
+          </p>
+
+          <p>
+            This concept is sometimes described as the Internet of Energy:
+            a digitally connected electricity system in which distributed
+            resources can communicate and respond to system conditions.
+          </p>
+
+          <h2>The rise of the prosumer</h2>
+
+          <p>
+            Traditional electricity systems largely separate generators
+            from consumers. Distributed solar, batteries, electric
+            vehicles and smart technologies can blur this boundary.
+          </p>
+
+          <p>
+            Consumers may become prosumers who both consume and produce
+            electricity. Digital platforms could allow communities to
+            coordinate these resources or even exchange electricity
+            locally.
+          </p>
+
+          <h2>Potential social effects</h2>
+
+          <p>
+            Peer-to-peer energy systems could provide people with greater
+            control over their energy use and encourage stronger community
+            participation in the energy system.
+          </p>
+
+          <p>
+            At the same time, energy transitions are not purely technical.
+            Questions of access, affordability, digital inclusion,
+            governance, privacy and community participation are equally
+            important.
+          </p>
+
+          <h2>Technology alone is not enough</h2>
+
+          <p>
+            Much of the discussion around digitally enabled,
+            decentralized energy systems focuses on technical and
+            economic performance. More attention is needed on their
+            social consequences.
+          </p>
+
+          <p>
+            Future energy research should therefore examine not only
+            whether these systems work technically, but also how they
+            change relationships between communities, companies,
+            consumers and institutions.
+          </p>
+        `
+      },
+
+
+      /* =======================================================
+         POST 4
+         ======================================================= */
+
+      {
+        slug: "grid-parity",
+
+        title:
+          "A Brief Review on the Concept of Grid Parity",
+
+        date: "2022-02-07",
+
+        category: "Energy Economics",
+
+        description:
+          "What grid parity means, how it is commonly measured and why comparing renewable generation costs with conventional electricity is more complicated than it appears.",
+
+        content: `
+          <p>
+            Grid parity is commonly used to describe the point at which
+            electricity from a renewable-energy technology becomes as
+            inexpensive as, or cheaper than, electricity from conventional
+            alternatives.
+          </p>
+
+          <p>
+            The idea is important because renewable technologies may no
+            longer require the same degree of financial support once they
+            become economically competitive.
+          </p>
+
+          <h2>Levelized cost of energy</h2>
+
+          <p>
+            A common approach is to calculate the Levelized Cost of Energy
+            (LCOE). LCOE estimates the lifetime cost of generating a unit
+            of electricity from a power plant.
+          </p>
+
+          <p>
+            The renewable-energy LCOE can then be compared against
+            electricity prices or the cost of conventional generation.
+          </p>
+
+          <h2>Why the comparison is imperfect</h2>
+
+          <p>
+            LCOE is useful, but it cannot capture every characteristic of
+            an electricity system. Wind and solar output changes with
+            weather and time, while the economic value of electricity
+            also varies depending on when and where it is produced.
+          </p>
+
+          <p>
+            Network investment, balancing, storage, curtailment and system
+            flexibility may also influence the overall economics.
+          </p>
+
+          <h2>Grid parity depends on context</h2>
+
+          <p>
+            Technology costs have fallen substantially, particularly for
+            solar photovoltaics and onshore wind. In many situations these
+            technologies are already highly competitive.
+          </p>
+
+          <p>
+            However, electricity prices, financing costs, resource
+            quality and policy environments differ from one country to
+            another. A technology reaching grid parity in one market does
+            not necessarily mean that it has reached the same point
+            everywhere.
+          </p>
+
+          <h2>A broader view of competitiveness</h2>
+
+          <p>
+            Grid parity is therefore best viewed as a useful indicator
+            rather than a universal threshold.
+          </p>
+
+          <p>
+            Evaluating renewable-energy competitiveness requires looking
+            beyond generation cost alone and considering the wider power
+            system in which the technology operates.
+          </p>
+        `
+      },
+
+
+      /* =======================================================
+         POST 5
+         ======================================================= */
+
+      {
+        slug: "virtual-power-plant-sdg7",
+
+        title:
+          "Virtual Power Plant for Realizing SDG7",
+
+        date: "2021-07-05",
+
+        category: "Power Systems",
+
+        description:
+          "How virtual power plants can coordinate distributed resources and help create more flexible, reliable and renewable electricity systems.",
+
+        content: `
+          <p>
+            Renewable energy and energy efficiency are central to
+            developing sustainable energy systems. As more wind and solar
+            generation enters electricity networks, however, balancing
+            supply and demand becomes increasingly complex.
+          </p>
+
+          <p>
+            Digitalization provides one way to coordinate a growing number
+            of distributed energy resources.
+          </p>
+
+          <h2>What is a virtual power plant?</h2>
+
+          <p>
+            A Virtual Power Plant, or VPP, combines multiple distributed
+            resources and coordinates them so that they can operate as a
+            single aggregated system.
+          </p>
+
+          <p>
+            These resources may include:
+          </p>
+
+          <ul>
+            <li>solar and wind generation,</li>
+            <li>battery storage,</li>
+            <li>electric vehicles,</li>
+            <li>dispatchable generators, and</li>
+            <li>flexible electricity demand.</li>
+          </ul>
+
+          <h2>Digital coordination</h2>
+
+          <p>
+            Smart meters, communications infrastructure and software
+            enable a VPP operator to receive information from distributed
+            assets and respond to changing electricity-system conditions.
+          </p>
+
+          <p>
+            Weather forecasts, power output, market prices and electricity
+            demand can be combined to determine when resources should
+            generate, store or consume electricity.
+          </p>
+
+          <h2>Unlocking flexibility</h2>
+
+          <p>
+            The major value of a VPP is flexibility. Thousands of small
+            resources that would individually have little influence on a
+            wholesale electricity system can become significant when
+            coordinated.
+          </p>
+
+          <p>
+            Aggregation can help integrate renewable generation, support
+            grid stability and provide additional opportunities for
+            distributed resources to participate in electricity markets.
+          </p>
+
+          <h2>Connection to sustainable development</h2>
+
+          <p>
+            Virtual power plants can contribute to wider sustainable
+            development objectives by enabling more renewable energy,
+            supporting innovation and infrastructure development and
+            reducing emissions.
+          </p>
+
+          <p>
+            Their successful deployment will require appropriate
+            regulation, secure communication systems, viable electricity
+            markets, better storage technologies and meaningful community
+            participation.
+          </p>
+        `
+      },
+
+
+      /* =======================================================
+         POST 6
+         ======================================================= */
+
+      {
+        slug: "myanmar-energy-sector",
+
+        title:
+          "Facts about Myanmar Energy Sector",
+
+        date: "2021-06-28",
+
+        category: "Myanmar · Energy",
+
+        description:
+          "An overview of Myanmar's electricity system, renewable-energy potential and some of the structural barriers to energy-sector development.",
+
+        content: `
+          <p>
+            Myanmar's energy system combines traditional biomass,
+            hydropower, natural gas, petroleum products and a growing
+            interest in renewable-energy technologies.
+          </p>
+
+          <p>
+            Rising electricity demand and the need to expand energy access
+            have made the development of the country's energy
+            infrastructure an important long-term challenge.
+          </p>
+
+          <h2>Energy access</h2>
+
+          <p>
+            Historically, electricity consumption per person has remained
+            low compared with many neighbouring countries. Expanding the
+            national grid, developing mini-grids and deploying standalone
+            systems have all been considered pathways for improving rural
+            electrification.
+          </p>
+
+          <h2>Solar potential</h2>
+
+          <p>
+            Myanmar has substantial solar resources. Solar mini-grids and
+            solar home systems can be particularly useful in locations
+            where extending the national electricity grid is expensive or
+            technically difficult.
+          </p>
+
+          <h2>Wind and other renewable resources</h2>
+
+          <p>
+            Wind resources also exist, especially in coastal and elevated
+            areas. However, theoretical resource potential does not always
+            translate directly into economically developable projects.
+          </p>
+
+          <p>
+            Grid availability, terrain, transport infrastructure and
+            financing conditions can significantly limit what can actually
+            be developed.
+          </p>
+
+          <p>
+            Agricultural residues and other forms of biomass may also
+            provide energy opportunities, particularly in rural regions,
+            provided that resources are managed sustainably.
+          </p>
+
+          <h2>Policy and investment challenges</h2>
+
+          <p>
+            Renewable-energy potential alone is not sufficient to create a
+            successful energy transition. Investors need predictable
+            regulations, technical standards, transparent project
+            procedures and access to financing.
+          </p>
+
+          <p>
+            Strengthening institutions and creating a stable policy
+            framework are therefore essential to attracting long-term
+            private-sector investment.
+          </p>
+
+          <h2>The opportunity</h2>
+
+          <p>
+            Myanmar has significant renewable-energy resources and a clear
+            need for expanded electricity access. With careful planning,
+            improved regulation and appropriate infrastructure, renewable
+            technologies can play a larger role in the country's future
+            energy mix.
+          </p>
+        `
+      }
+
+    ];
+
+
+    /* =========================================================
+       BLOG UTILITIES
+       ========================================================= */
+
+    const blogGrid =
+      document.getElementById("blogGrid");
+
+    const blogSearch =
+      document.getElementById("blogSearch");
+
+    const articleCount =
+      document.getElementById("articleCount");
+
+
+    function formatDate(dateString) {
+      return new Intl.DateTimeFormat(
+        "en",
+        {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        }
+      ).format(
+        new Date(dateString + "T00:00:00")
+      );
+    }
+
+
+    function removeHTML(html) {
+      const element =
+        document.createElement("div");
+
+      element.innerHTML = html;
+
+      return element.textContent || "";
+    }
+
+
+    function readingTime(content) {
+      const words =
+        removeHTML(content)
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean)
+          .length;
+
+      const minutes =
+        Math.max(1, Math.ceil(words / 220));
+
+      return `${minutes} min read`;
+    }
+
+
+    /* =========================================================
+       BLOG CARDS
+       ========================================================= */
+
+    function renderBlogCards(posts = BLOG_POSTS) {
+
+      blogGrid.innerHTML = "";
+
+      articleCount.textContent =
+        `${posts.length} article${posts.length === 1 ? "" : "s"}`;
+
+      if (!posts.length) {
+        blogGrid.innerHTML = `
+          <div class="no-results">
+            No articles matched your search.
+          </div>
+        `;
+
+        return;
+      }
+
+
+      posts.forEach((post) => {
+
+        const card =
+          document.createElement("article");
+
+        card.className =
+          "article-card reveal visible";
+
+        card.tabIndex = 0;
+
+        card.setAttribute(
+          "role",
+          "link"
+        );
+
+        card.setAttribute(
+          "aria-label",
+          `Read ${post.title}`
+        );
+
+
+        card.innerHTML = `
+          <div class="article-meta">
+            <span class="article-category">
+              ${post.category}
+            </span>
+
+            <span>
+              ${formatDate(post.date)}
+            </span>
+          </div>
+
+          <h3>
+            ${post.title}
+          </h3>
+
+          <p>
+            ${post.description}
+          </p>
+
+          <div class="article-read">
+            ${readingTime(post.content)}
+
+            ·
+
+            Read article
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+              ></path>
+            </svg>
+          </div>
+        `;
+
+
+        const open =
+          () => {
+            window.location.hash =
+              `post/${post.slug}`;
+          };
+
+
+        card.addEventListener(
+          "click",
+          open
+        );
+
+
+        card.addEventListener(
+          "keydown",
+          (event) => {
+
+            if (
+              event.key === "Enter" ||
+              event.key === " "
+            ) {
+              event.preventDefault();
+              open();
+            }
+
+          }
+        );
+
+
+        blogGrid.appendChild(card);
+
+      });
+
+    }
+
+
+    /* =========================================================
+       BLOG SEARCH
+       ========================================================= */
+
+    blogSearch.addEventListener(
+      "input",
+      () => {
+
+        const query =
+          blogSearch.value
+            .trim()
+            .toLowerCase();
+
+
+        const filtered =
+          BLOG_POSTS.filter((post) => {
+
+            const searchable = `
+              ${post.title}
+              ${post.category}
+              ${post.description}
+              ${removeHTML(post.content)}
+            `.toLowerCase();
+
+
+            return searchable.includes(query);
+
+          });
+
+
+        renderBlogCards(filtered);
+
+      }
+    );
+
+
+    /* =========================================================
+       ARTICLE ROUTING
+       ========================================================= */
+
+    const portfolio =
+      document.getElementById("portfolio");
+
+    const articlePage =
+      document.getElementById("articlePage");
+
+    const articleTitle =
+      document.getElementById("articleTitle");
+
+    const articleCategory =
+      document.getElementById("articleCategory");
+
+    const articleDescription =
+      document.getElementById("articleDescription");
+
+    const articleDate =
+      document.getElementById("articleDate");
+
+    const articleReadingTime =
+      document.getElementById("articleReadingTime");
+
+    const articleBody =
+      document.getElementById("articleBody");
+
+    const articleNavigation =
+      document.getElementById("articleNavigation");
+
+    const backToBlog =
+      document.getElementById("backToBlog");
+
+    const brandLink =
+      document.getElementById("brandLink");
+
+
+    function renderArticle(post) {
+
+      document.title =
+        `${post.title} | Ye Min`;
+
+      articleCategory.textContent =
+        post.category;
+
+      articleTitle.textContent =
+        post.title;
+
+      articleDescription.textContent =
+        post.description;
+
+      articleDate.textContent =
+        formatDate(post.date);
+
+      articleReadingTime.textContent =
+        readingTime(post.content);
+
+      articleBody.innerHTML =
+        post.content;
+
+
+      renderArticleNavigation(post);
+
+
+      portfolio.classList.add("hidden");
+      articlePage.classList.remove("hidden");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "instant"
+      });
+
+    }
+
+
+    function renderArticleNavigation(post) {
+
+      const index =
+        BLOG_POSTS.findIndex(
+          (item) =>
+            item.slug === post.slug
+        );
+
+
+      const previous =
+        BLOG_POSTS[index - 1];
+
+      const next =
+        BLOG_POSTS[index + 1];
+
+
+      articleNavigation.innerHTML = "";
+
+
+      if (previous) {
+
+        const previousCard =
+          document.createElement("div");
+
+        previousCard.className =
+          "article-nav-card";
+
+        previousCard.innerHTML = `
+          <div class="article-nav-label">
+            Previous article
+          </div>
+
+          <div class="article-nav-title">
+            ${previous.title}
+          </div>
+        `;
+
+        previousCard.onclick =
+          () => {
+            location.hash =
+              `post/${previous.slug}`;
+          };
+
+        articleNavigation.appendChild(
+          previousCard
+        );
+
+      } else {
+
+        articleNavigation.innerHTML += `
+          <div class="article-nav-card">
+            <div class="article-nav-label">
+              Previous article
+            </div>
+
+            <div class="article-nav-title muted">
+              You are reading the newest article.
+            </div>
+          </div>
+        `;
+
+      }
+
+
+      if (next) {
+
+        const nextCard =
+          document.createElement("div");
+
+        nextCard.className =
+          "article-nav-card";
+
+        nextCard.innerHTML = `
+          <div class="article-nav-label">
+            Next article
+          </div>
+
+          <div class="article-nav-title">
+            ${next.title}
+          </div>
+        `;
+
+        nextCard.onclick =
+          () => {
+            location.hash =
+              `post/${next.slug}`;
+          };
+
+        articleNavigation.appendChild(
+          nextCard
+        );
+
+      } else {
+
+        articleNavigation.innerHTML += `
+          <div class="article-nav-card">
+            <div class="article-nav-label">
+              Next article
+            </div>
+
+            <div class="article-nav-title muted">
+              You have reached the first article.
+            </div>
+          </div>
+        `;
+
+      }
+
+    }
+
+
+    function showPortfolio(target = "home") {
+
+      articlePage.classList.add("hidden");
+      portfolio.classList.remove("hidden");
+
+      document.title =
+        "Ye Min | Offshore Wind & Renewable Energy";
+
+
+      requestAnimationFrame(() => {
+
+        const element =
+          document.getElementById(target);
+
+        if (element) {
+
+          element.scrollIntoView({
+            behavior: "smooth"
+          });
+
+        }
+
+      });
+
+    }
+
+
+    function handleRoute() {
+
+      const hash =
+        decodeURIComponent(
+          window.location.hash
+            .replace(/^#/, "")
+        );
+
+
+      if (hash.startsWith("post/")) {
+
+        const slug =
+          hash.substring(5);
+
+        const post =
+          BLOG_POSTS.find(
+            (item) =>
+              item.slug === slug
+          );
+
+
+        if (post) {
+
+          renderArticle(post);
+          return;
+
+        }
+
+      }
+
+
+      const target =
+        ["home", "about", "blog", "contact"]
+          .includes(hash)
+          ? hash
+          : "home";
+
+
+      showPortfolio(target);
+
+    }
+
+
+    window.addEventListener(
+      "hashchange",
+      handleRoute
+    );
+
+
+    backToBlog.addEventListener(
+      "click",
+      () => {
+        location.hash = "blog";
+      }
+    );
+
+
+    brandLink.addEventListener(
+      "click",
+      () => {
+        location.hash = "home";
+      }
+    );
+
+
+    /* =========================================================
+       COPY ARTICLE LINK
+       ========================================================= */
+
+    const copyArticleLink =
+      document.getElementById(
+        "copyArticleLink"
+      );
+
+    const copyText =
+      document.getElementById(
+        "copyText"
+      );
+
+
+    copyArticleLink.addEventListener(
+      "click",
+      async () => {
+
+        try {
+
+          await navigator.clipboard.writeText(
+            window.location.href
+          );
+
+          copyText.textContent =
+            "Copied!";
+
+          setTimeout(() => {
+            copyText.textContent =
+              "Copy link";
+          }, 1800);
+
+        } catch {
+
+          copyText.textContent =
+            "Copy failed";
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       THEME
+       ========================================================= */
+
+    const root =
+      document.documentElement;
+
+    const themeToggle =
+      document.getElementById(
+        "themeToggle"
+      );
+
+
+    function preferredTheme() {
+
+      const saved =
+        localStorage.getItem(
+          "portfolio-theme"
+        );
+
+
+      if (
+        saved === "dark" ||
+        saved === "light"
+      ) {
+        return saved;
+      }
+
+
+      return window.matchMedia(
+        "(prefers-color-scheme: light)"
+      ).matches
+        ? "light"
+        : "dark";
+
+    }
+
+
+    function setTheme(theme) {
+
+      root.dataset.theme =
+        theme;
+
+      root.style.colorScheme =
+        theme;
+
+      localStorage.setItem(
+        "portfolio-theme",
+        theme
+      );
+
+    }
+
+
+    setTheme(
+      preferredTheme()
+    );
+
+
+    themeToggle.addEventListener(
+      "click",
+      () => {
+
+        setTheme(
+          root.dataset.theme === "dark"
+            ? "light"
+            : "dark"
+        );
+
+      }
+    );
+
+
+    /* =========================================================
+       MOBILE MENU
+       ========================================================= */
+
+    const menuToggle =
+      document.getElementById(
+        "menuToggle"
+      );
+
+    const navLinks =
+      document.getElementById(
+        "navLinks"
+      );
+
+
+    function closeMenu() {
+
+      navLinks.classList.remove(
+        "open"
+      );
+
+      document.body.classList.remove(
+        "menu-open"
+      );
+
+    }
+
+
+    menuToggle.addEventListener(
+      "click",
+      () => {
+
+        const open =
+          navLinks.classList.toggle(
+            "open"
+          );
+
+        document.body.classList.toggle(
+          "menu-open",
+          open
+        );
+
+      }
+    );
+
+
+    navLinks
+      .querySelectorAll("a")
+      .forEach((link) => {
+
+        link.addEventListener(
+          "click",
+          closeMenu
+        );
+
+      });
+
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
+    const siteHeader =
+      document.getElementById(
+        "siteHeader"
+      );
+
+
+    function updateHeader() {
+
+      siteHeader.classList.toggle(
+        "scrolled",
+        window.scrollY > 12
+      );
+
+    }
+
+
+    window.addEventListener(
+      "scroll",
+      updateHeader,
+      {
+        passive: true
+      }
+    );
+
+
+    updateHeader();
+
+
+    /* =========================================================
+       REVEAL ANIMATION
+       ========================================================= */
+
+    const revealObserver =
+      new IntersectionObserver(
+        (entries, observer) => {
+
+          entries.forEach(
+            (entry) => {
+
+              if (
+                !entry.isIntersecting
+              ) {
+                return;
+              }
+
+              entry.target.classList.add(
+                "visible"
+              );
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+          );
+
+        },
+        {
+          threshold: 0.1
+        }
+      );
+
+
+    document
+      .querySelectorAll(".reveal")
+      .forEach((element) => {
+
+        revealObserver.observe(
+          element
+        );
+
+      });
+
+
+    /* =========================================================
+       CONTACT FORM
+       ========================================================= */
+
+    const contactForm =
+      document.getElementById(
+        "contactForm"
+      );
+
+    const formStatus =
+      document.getElementById(
+        "formStatus"
+      );
+
+
+    contactForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+
+        const data =
+          new FormData(contactForm);
+
+
+        const name =
+          data.get("name").trim();
+
+        const email =
+          data.get("email").trim();
+
+        const subject =
+          data.get("subject").trim();
+
+        const message =
+          data.get("message").trim();
+
+
+        const body = `
+Hello Ye Min,
+
+${message}
+
+Best,
+${name}
+
+Email:
+${email}
+        `.trim();
+
+
+        if (CONTACT_EMAIL) {
+
+          window.location.href =
+            `mailto:${encodeURIComponent(CONTACT_EMAIL)}` +
+            `?subject=${encodeURIComponent(subject)}` +
+            `&body=${encodeURIComponent(body)}`;
+
+          return;
+
+        }
+
+
+        const fullMessage =
+          `Subject: ${subject}\n\n${body}`;
+
+
+        try {
+
+          await navigator.clipboard.writeText(
+            fullMessage
+          );
+
+
+          formStatus.innerHTML = `
+            Your message has been copied.
+            You can now paste it into
+            <a
+              href="https://www.linkedin.com/in/yeminn/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                color: var(--accent);
+                font-weight: 750;
+              "
+            >
+              LinkedIn
+            </a>.
+          `;
+
+          formStatus.classList.add(
+            "visible"
+          );
+
+        } catch {
+
+          formStatus.textContent =
+            "Please add your email address to CONTACT_EMAIL to enable direct email messages.";
+
+          formStatus.classList.add(
+            "visible"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       INITIALIZE
+       ========================================================= */
+
+    document.getElementById(
+      "year"
+    ).textContent =
+      new Date().getFullYear();
+
+
+    renderBlogCards();
+
+    handleRoute();
+
+  </script>
+
+</body>
+</html>
