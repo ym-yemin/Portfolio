@@ -15,6 +15,7 @@ tags:
   - Python
   - Japan
 image: /assets/images/posts/japan-air-density-estimator.png
+published: false
 ---
 
 When I begin looking at a potential wind site in Japan, air density is often one of the first environmental quantities I want to understand. It appears directly in the power available in the wind and influences how a turbine power curve should be interpreted. Yet at an early screening stage, the pressure, temperature and humidity measurements needed to calculate it may not exist at the site.
