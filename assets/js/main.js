@@ -1,4 +1,4 @@
-const CONTACT_EMAIL = "";
+const CONTACT_EMAIL = "iemin.ym@gmail.com";
 
 const root = document.documentElement;
 const themeToggle = document.getElementById("themeToggle");
