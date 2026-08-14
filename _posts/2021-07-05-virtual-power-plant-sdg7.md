@@ -4,6 +4,7 @@ date: 2021-07-05
 category: "Power Systems"
 description: "How virtual power plants can coordinate distributed resources and help create more flexible, reliable and renewable electricity systems."
 reading_time: "3 min read"
+published: false
 ---
 Renewable energy and energy efficiency are central to developing sustainable energy systems. As more wind and solar generation enters electricity networks, however, balancing supply and demand becomes increasingly complex.
 
