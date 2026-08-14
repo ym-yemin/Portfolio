@@ -59,9 +59,6 @@ footer{padding:28px 0;border-top:1px solid var(--border)}.footer-inner{display:f
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
 
 
-/* =========================================================
-   HOME / HERO
-   ========================================================= */
 
 .hero-main {
   max-width: 850px;
@@ -70,7 +67,6 @@ footer{padding:28px 0;border-top:1px solid var(--border)}.footer-inner{display:f
 .hero-link {
   display: inline-flex;
   align-items: center;
-
   margin-top: 8px;
 
   color: var(--accent);
@@ -87,15 +83,12 @@ footer{padding:28px 0;border-top:1px solid var(--border)}.footer-inner{display:f
 
 
 /* =========================================================
-   HOME FOCUS AREAS
+   HOME FOCUS
    ========================================================= */
 
 .home-focus {
   display: grid;
-
   grid-template-columns: repeat(3, 1fr);
-
-  gap: 0;
 
   margin-top: 110px;
 
@@ -109,7 +102,6 @@ footer{padding:28px 0;border-top:1px solid var(--border)}.footer-inner{display:f
 
 .focus-item + .focus-item {
   padding-left: 34px;
-
   border-left: 1px solid var(--border);
 }
 
@@ -132,8 +124,7 @@ footer{padding:28px 0;border-top:1px solid var(--border)}.footer-inner{display:f
 }
 
 .focus-item p {
-  max-width: 300px;
-
+  max-width: 310px;
   margin-bottom: 0;
 
   color: var(--text-soft);
@@ -147,7 +138,6 @@ footer{padding:28px 0;border-top:1px solid var(--border)}.footer-inner{display:f
 
   .home-focus {
     grid-template-columns: 1fr;
-
     margin-top: 75px;
   }
 
