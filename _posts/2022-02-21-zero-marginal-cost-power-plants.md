@@ -4,6 +4,7 @@ date: 2022-02-21
 category: "Digital Energy"
 description: "How digitalization, distributed energy and peer-to-peer electricity systems could reshape the relationship between consumers and the power system."
 reading_time: "3 min read"
+published: false
 ---
 Increasing the share of wind and solar power requires a transformation of the electricity system. Renewable generation is variable, so maintaining the balance between electricity supply and demand requires greater flexibility.
 
