@@ -4,6 +4,7 @@ date: 2021-06-28
 category: "Myanmar · Energy"
 description: "An overview of Myanmar's electricity system, renewable-energy potential and some of the structural barriers to energy-sector development."
 reading_time: "3 min read"
+published: false
 ---
 Myanmar's energy system combines traditional biomass, hydropower, natural gas, petroleum products and a growing interest in renewable-energy technologies.
 
