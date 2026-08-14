@@ -4,6 +4,7 @@ date: 2022-08-10
 category: "Wind · Policy"
 description: "A review of feed-in tariff design for wind energy and the role policy can play in supporting renewable-energy investment."
 reading_time: "4 min read"
+published: false
 ---
 Governments use a range of mechanisms to encourage renewable-energy investment. These include renewable portfolio standards, certificates, auctions, tax incentives, subsidies and feed-in tariffs.
 
