@@ -54,14 +54,14 @@ Interactive latitude/elevation estimator
 
 ## 1. Building the station catalogue
 
-JMA's <a href="https://www.data.jma.go.jp/stats/etrn/" target="_blank" rel="noopener noreferrer" style="color: #006fd6 !important; text-decoration: underline !important; font-weight: 600;">historical weather-data selector</a> uses regional image maps. The underlying HTML contains the identifiers and metadata needed to turn the visual map into a structured station catalogue.
+JMA's [historical weather-data selector](https://www.data.jma.go.jp/stats/etrn/) uses regional image maps. The underlying HTML contains the identifiers and metadata needed to turn the visual map into a structured station catalogue.
 
 The two key identifiers are:
 
 - `prec_no`: JMA's regional code; and
 - `block_no`: the observation-station code.
 
-The station markup also provides the station name, latitude, longitude and elevation. The notebook follows the station-discovery approach described in <a class="project-source-link" href="https://medium.com/@seimaosako/how-to-obtain-weather-data-at-locations-in-japan-12f478ec1b96" target="_blank" rel="noopener noreferrer">Sako-san's post, "How to Obtain Weather Data at Locations in Japan"</a>, then extends it with geographic filtering, station classification and reusable metadata fields.
+The station markup also provides the station name, latitude, longitude and elevation. The notebook follows the station-discovery approach described in [Sako-san's post, "How to Obtain Weather Data at Locations in Japan"](https://medium.com/@seimaosako/how-to-obtain-weather-data-at-locations-in-japan-12f478ec1b96), then extends it with geographic filtering, station classification and reusable metadata fields.
 
 ```python
 import re
