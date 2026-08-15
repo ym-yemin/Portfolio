@@ -222,7 +222,7 @@ Enter the latitude and elevation above mean sea level for a location in Japan. T
       detail.textContent =
         "Elevation: "
         + elevation.toFixed(0)
-        + " m ASL | "
+        + " m MSL | "
         + differenceText
         + differenceFromStandard.toFixed(1)
         + "% vs 1.225 kg/m\u00B3";
