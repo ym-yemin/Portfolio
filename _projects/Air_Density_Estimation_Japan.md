@@ -203,7 +203,7 @@ Enter the latitude and elevation above mean sea level for a location in Japan. T
         result.classList.add("jma-density-tool__result--error");
         value.textContent = "Check the input values";
         detail.textContent =
-          "Use 20-46 deg N and an elevation between -10 and 4,000 m ASL.";
+          "Use 20-46 deg N and an elevation between -10 and 4,000 m MSL.";
         return;
       }
 
