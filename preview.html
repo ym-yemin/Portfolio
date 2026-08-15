@@ -1,0 +1,114 @@
+---
+layout: default
+title: Projects
+description: Selected technical projects by Ye Min in offshore wind, renewable energy, meteorology and data analysis.
+permalink: /projects/
+---
+
+<main>
+
+  <section class="projects-page">
+
+    <div class="container">
+
+      <div class="projects-header reveal">
+
+        <div class="eyebrow">
+          Projects
+        </div>
+
+        <h1>
+          Selected technical work.
+        </h1>
+
+        <p class="projects-intro">
+          Projects exploring offshore wind, renewable-energy systems,
+          meteorological data and technical analysis.
+        </p>
+
+      </div>
+
+
+      <div class="projects-grid">
+
+        {% assign sorted_projects = site.projects | sort: "date" | reverse %}
+
+        {% for project in sorted_projects %}
+
+          <article class="project-card reveal">
+
+            <div class="project-meta">
+
+              {% if project.category %}
+                <span class="project-category">
+                  {{ project.category }}
+                </span>
+              {% endif %}
+
+              {% if project.date %}
+                <span>
+                  {{ project.date | date: "%Y" }}
+                </span>
+              {% endif %}
+
+            </div>
+
+
+            <h2>
+              <a href="{{ project.url | relative_url }}">
+                {{ project.title }}
+              </a>
+            </h2>
+
+
+            {% if project.description %}
+              <p>
+                {{ project.description }}
+              </p>
+            {% endif %}
+
+
+            {% if project.tools %}
+
+              <div class="project-tools">
+
+                {% for tool in project.tools %}
+                  <span class="project-tool">
+                    {{ tool }}
+                  </span>
+                {% endfor %}
+
+              </div>
+
+            {% endif %}
+
+
+            <a
+              class="project-link"
+              href="{{ project.url | relative_url }}"
+            >
+              View project
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6"></path>
+              </svg>
+
+            </a>
+
+          </article>
+
+        {% endfor %}
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
