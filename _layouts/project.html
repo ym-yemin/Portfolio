@@ -1,0 +1,99 @@
+---
+layout: default
+---
+
+<main>
+
+  <article class="project-page">
+
+    <div class="container">
+
+      <div class="project-topbar">
+
+        <a
+          href="{{ '/projects/' | relative_url }}"
+          class="article-back"
+        >
+          ← All projects
+        </a>
+
+      </div>
+
+
+      <header class="project-header">
+
+        {% if page.category %}
+          <div class="article-header-category">
+            {{ page.category }}
+          </div>
+        {% endif %}
+
+        <h1>
+          {{ page.title }}
+        </h1>
+
+        {% if page.description %}
+          <p class="article-description">
+            {{ page.description }}
+          </p>
+        {% endif %}
+
+
+        <div class="project-header-meta">
+
+          {% if page.date %}
+            <span>
+              {{ page.date | date: "%B %Y" }}
+            </span>
+          {% endif %}
+
+          {% if page.status %}
+            <span>
+              {{ page.status }}
+            </span>
+          {% endif %}
+
+        </div>
+
+
+        {% if page.tools %}
+
+          <div class="project-tools project-tools-header">
+
+            {% for tool in page.tools %}
+              <span class="project-tool">
+                {{ tool }}
+              </span>
+            {% endfor %}
+
+          </div>
+
+        {% endif %}
+
+      </header>
+
+
+      <div class="article-divider"></div>
+
+
+      <div class="article-body project-body">
+        {{ content }}
+      </div>
+
+
+      <footer class="project-footer">
+
+        <a
+          href="{{ '/projects/' | relative_url }}"
+          class="button"
+        >
+          ← Back to projects
+        </a>
+
+      </footer>
+
+    </div>
+
+  </article>
+
+</main>
