@@ -1,6 +1,6 @@
 ---
 layout: project
-title: "Wind Resource Analysis Using Japanese Meteorological Data"
+title: "Air Density Estimation Tool for Japan"
 date: 2026-07-01
 category: "Wind Energy Â· Data Analysis"
 description: "Building a Japan-wide air-density screening tool from JMA monthly observations, Python data pipelines and regression modelling."
