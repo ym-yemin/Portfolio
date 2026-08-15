@@ -34,6 +34,209 @@ The result is an end-to-end Python workflow that:
 
 The estimator provides a **long-term climatological value**, and it is intended for preliminary wind-resource screening, measurement planning and engineering reasonableness checks.
 
+## Try the air-density estimator
+
+Enter the latitude and elevation above mean sea level for a location in Japan. The calculator applies the fitted 2006-2025 station-mean regression model described later on this page.
+
+<div class="jma-density-tool" id="jma-density-tool">
+  <form class="jma-density-tool__form" id="jma-density-form">
+    <div class="jma-density-tool__field">
+      <label for="jma-density-latitude">Latitude (&deg;N)</label>
+      <input id="jma-density-latitude" name="latitude" type="number" min="20" max="46" step="0.0001" value="35.6817" required>
+    </div>
+
+    <div class="jma-density-tool__field">
+      <label for="jma-density-elevation">Elevation (m ASL)</label>
+      <input id="jma-density-elevation" name="elevation" type="number" min="-10" max="4000" step="1" value="20" required>
+    </div>
+
+    <button class="jma-density-tool__button" type="submit">
+      Estimate air density
+    </button>
+  </form>
+
+  <div class="jma-density-tool__result" id="jma-density-result" aria-live="polite">
+    <span class="jma-density-tool__eyebrow">Estimated long-term mean</span>
+    <strong class="jma-density-tool__value" id="jma-density-value">
+      1.215 kg/m&sup3;
+    </strong>
+    <span class="jma-density-tool__detail" id="jma-density-detail">
+      Elevation: 20 m ASL | -0.8% vs 1.225 kg/m&sup3;
+    </span>
+  </div>
+</div>
+
+<style>
+  .jma-density-tool {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(15rem, 0.65fr);
+    gap: 1.25rem;
+    margin: 1.75rem 0;
+    padding: 1.35rem;
+    border: 1px solid rgba(30, 55, 75, 0.16);
+    border-radius: 0.9rem;
+    background: #f6f8fa;
+  }
+
+  .jma-density-tool__form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+    align-items: end;
+  }
+
+  .jma-density-tool__field {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .jma-density-tool__field label {
+    color: #243746;
+    font-size: 0.82rem;
+    font-weight: 650;
+    line-height: 1.3;
+  }
+
+  .jma-density-tool__field input {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 2.7rem;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid #b9c4cc;
+    border-radius: 0.55rem;
+    background: #ffffff;
+    color: #14232e;
+    font: inherit;
+  }
+
+  .jma-density-tool__field input:focus {
+    border-color: #176b87;
+    outline: 3px solid rgba(23, 107, 135, 0.16);
+  }
+
+  .jma-density-tool__button {
+    grid-column: 1 / -1;
+    min-height: 2.8rem;
+    border: 0;
+    border-radius: 0.55rem;
+    background: #123f54;
+    color: #ffffff;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+  }
+
+  .jma-density-tool__button:hover {
+    background: #176b87;
+  }
+
+  .jma-density-tool__result {
+    display: flex;
+    min-height: 8.5rem;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.15rem;
+    border-radius: 0.7rem;
+    background: #123f54;
+    color: #ffffff;
+  }
+
+  .jma-density-tool__eyebrow,
+  .jma-density-tool__detail {
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 0.8rem;
+  }
+
+  .jma-density-tool__value {
+    margin: 0.35rem 0;
+    font-size: clamp(1.8rem, 4vw, 2.55rem);
+    line-height: 1.05;
+  }
+
+  .jma-density-tool__result--error .jma-density-tool__value {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 760px) {
+    .jma-density-tool,
+    .jma-density-tool__form {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    "use strict";
+
+    var form = document.getElementById("jma-density-form");
+    var result = document.getElementById("jma-density-result");
+    var value = document.getElementById("jma-density-value");
+    var detail = document.getElementById("jma-density-detail");
+
+    if (!form || !result || !value || !detail) {
+      return;
+    }
+
+    function calculate(event) {
+      if (event) {
+        event.preventDefault();
+      }
+
+      var latitude = Number(
+        document.getElementById("jma-density-latitude").value
+      );
+
+      var elevation = Number(
+        document.getElementById("jma-density-elevation").value
+      );
+
+      var inputIsValid = Number.isFinite(latitude)
+        && Number.isFinite(elevation)
+        && latitude >= 20
+        && latitude <= 46
+        && elevation >= -10
+        && elevation <= 4000;
+
+      if (!inputIsValid) {
+        result.classList.add("jma-density-tool__result--error");
+        value.textContent = "Check the input values";
+        detail.textContent =
+          "Use 20-46 deg N and an elevation between -10 and 4,000 m ASL.";
+        return;
+      }
+
+      var density = 1.07738
+        + 0.00392261 * latitude
+        - 0.000110927 * elevation;
+
+      var differenceFromStandard = (density / 1.225 - 1) * 100;
+      var differenceText = differenceFromStandard >= 0 ? "+" : "";
+
+      result.classList.remove("jma-density-tool__result--error");
+
+      value.textContent =
+        density.toFixed(3) + " kg/m\u00B3";
+
+      detail.textContent =
+        "Elevation: "
+        + elevation.toFixed(0)
+        + " m ASL | "
+        + differenceText
+        + differenceFromStandard.toFixed(1)
+        + "% vs 1.225 kg/m\u00B3";
+    }
+
+    form.addEventListener("submit", calculate);
+    calculate();
+  }());
+</script>
+
+### Using the result
+
+The tool returns the modelled 2006-2025 long-term mean air density at the entered elevation in kg/m³. It can support early-stage site comparisons and provide an initial assumption before local measurements are available. It does not replace simultaneous pressure, temperature and humidity measurements for turbine power-performance testing or bankable energy-yield analysis.
+
 ## Workflow
 
 ```text
@@ -353,197 +556,6 @@ Combining the elevation model and latitude correction gives the final screening 
 The final equation can estimate a long-term mean density from two readily available site descriptors. If the estimate is required at turbine hub height, use the target elevation above mean sea level:
 
 > **target elevation = ground elevation ASL + hub height AGL**
-
-## Try the air-density estimator
-
-Enter a latitude and elevation for a location in Japan. Hub height is optional. The calculator applies the fitted monthly 2006–2025 regression equation shown above.
-
-<div class="jma-density-tool" id="jma-density-tool">
-  <form class="jma-density-tool__form" id="jma-density-form">
-    <div class="jma-density-tool__field">
-      <label for="jma-density-latitude">Latitude (°N)</label>
-      <input id="jma-density-latitude" name="latitude" type="number" min="20" max="46" step="0.0001" value="35.6817" required>
-    </div>
-    <div class="jma-density-tool__field">
-      <label for="jma-density-elevation">Ground elevation (m ASL)</label>
-      <input id="jma-density-elevation" name="elevation" type="number" min="-10" max="4000" step="1" value="20" required>
-    </div>
-    <div class="jma-density-tool__field">
-      <label for="jma-density-height">Measurement or hub height (m AGL)</label>
-      <input id="jma-density-height" name="height" type="number" min="0" max="400" step="1" value="130">
-    </div>
-    <button class="jma-density-tool__button" type="submit">Estimate air density</button>
-  </form>
-  <div class="jma-density-tool__result" id="jma-density-result" aria-live="polite">
-    <span class="jma-density-tool__eyebrow">Estimated long-term mean</span>
-    <strong class="jma-density-tool__value" id="jma-density-value">1.201 kg/m³</strong>
-    <span class="jma-density-tool__detail" id="jma-density-detail">Target elevation: 150 m ASL</span>
-  </div>
-</div>
-
-<style>
-  .jma-density-tool {
-    display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(15rem, 0.65fr);
-    gap: 1.25rem;
-    margin: 1.75rem 0;
-    padding: 1.35rem;
-    border: 1px solid rgba(30, 55, 75, 0.16);
-    border-radius: 0.9rem;
-    background: #f6f8fa;
-  }
-
-  .jma-density-tool__form {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.9rem;
-    align-items: end;
-  }
-
-  .jma-density-tool__field {
-    display: grid;
-    gap: 0.35rem;
-  }
-
-  .jma-density-tool__field label {
-    color: #243746;
-    font-size: 0.82rem;
-    font-weight: 650;
-    line-height: 1.3;
-  }
-
-  .jma-density-tool__field input {
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 2.7rem;
-    padding: 0.65rem 0.75rem;
-    border: 1px solid #b9c4cc;
-    border-radius: 0.55rem;
-    background: #ffffff;
-    color: #14232e;
-    font: inherit;
-  }
-
-  .jma-density-tool__field input:focus {
-    border-color: #176b87;
-    outline: 3px solid rgba(23, 107, 135, 0.16);
-  }
-
-  .jma-density-tool__button {
-    grid-column: 1 / -1;
-    min-height: 2.8rem;
-    border: 0;
-    border-radius: 0.55rem;
-    background: #123f54;
-    color: #ffffff;
-    cursor: pointer;
-    font: inherit;
-    font-weight: 700;
-  }
-
-  .jma-density-tool__button:hover {
-    background: #176b87;
-  }
-
-  .jma-density-tool__result {
-    display: flex;
-    min-height: 8.5rem;
-    flex-direction: column;
-    justify-content: center;
-    padding: 1.15rem;
-    border-radius: 0.7rem;
-    background: #123f54;
-    color: #ffffff;
-  }
-
-  .jma-density-tool__eyebrow,
-  .jma-density-tool__detail {
-    color: rgba(255, 255, 255, 0.76);
-    font-size: 0.8rem;
-  }
-
-  .jma-density-tool__value {
-    margin: 0.35rem 0;
-    font-size: clamp(1.8rem, 4vw, 2.55rem);
-    line-height: 1.05;
-  }
-
-  .jma-density-tool__result--error .jma-density-tool__value {
-    font-size: 1rem;
-    line-height: 1.4;
-  }
-
-  @media (max-width: 760px) {
-    .jma-density-tool,
-    .jma-density-tool__form {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
-
-<script>
-  (function () {
-    "use strict";
-
-    var form = document.getElementById("jma-density-form");
-    var result = document.getElementById("jma-density-result");
-    var value = document.getElementById("jma-density-value");
-    var detail = document.getElementById("jma-density-detail");
-
-    if (!form || !result || !value || !detail) {
-      return;
-    }
-
-    function calculate(event) {
-      if (event) {
-        event.preventDefault();
-      }
-
-      var latitude = Number(document.getElementById("jma-density-latitude").value);
-      var groundElevation = Number(document.getElementById("jma-density-elevation").value);
-      var height = Number(document.getElementById("jma-density-height").value || 0);
-      var targetElevation = groundElevation + height;
-
-      var inputIsValid = Number.isFinite(latitude)
-        && Number.isFinite(groundElevation)
-        && Number.isFinite(height)
-        && latitude >= 20
-        && latitude <= 46
-        && groundElevation >= -10
-        && height >= 0
-        && targetElevation <= 4000;
-
-      if (!inputIsValid) {
-        result.classList.add("jma-density-tool__result--error");
-        value.textContent = "Check the input values";
-        detail.textContent = "Use 20–46°N and a target elevation no higher than 4,000 m.";
-        return;
-      }
-
-      var density = 1.07738
-        + 0.00392261 * latitude
-        - 0.000110927 * targetElevation;
-      var differenceFromStandard = (density / 1.225 - 1) * 100;
-      var differenceText = differenceFromStandard >= 0 ? "+" : "";
-
-      result.classList.remove("jma-density-tool__result--error");
-      value.textContent = density.toFixed(3) + " kg/m³";
-      detail.textContent = "Target elevation: "
-        + targetElevation.toFixed(0)
-        + " m ASL · "
-        + differenceText
-        + differenceFromStandard.toFixed(1)
-        + "% vs 1.225 kg/m³";
-    }
-
-    form.addEventListener("submit", calculate);
-    calculate();
-  }());
-</script>
-
-### Using the result
-
-The tool returns the modelled 2006–2025 long-term mean density in kg/m³. It can support early-stage comparisons and provide an initial assumption before site measurements are available. It does not replace simultaneous pressure, temperature and humidity measurements for turbine power-performance or bankable energy-yield analysis.
 
 
 *Method note: station counts, monthly row counts and fitted coefficients are saved-run results from the project notebook. JMA pages, schemas and observations may change. The chart and regression model are the author's derived work based on JMA observations.*
