@@ -545,28 +545,5 @@ Enter a latitude and elevation for a location in Japan. Hub height is optional. 
 
 The tool returns the modelled 2006–2025 long-term mean density in kg/m³. It can support early-stage comparisons and provide an initial assumption before site measurements are available. It does not replace simultaneous pressure, temperature and humidity measurements for turbine power-performance or bankable energy-yield analysis.
 
-## Project outcome
-
-This project demonstrates a complete analytical workflow rather than an isolated model:
-
-- parsing a public, semi-structured meteorological source;
-- designing a respectful and resumable collection process;
-- handling multi-level HTML tables and missing-value symbols;
-- joining meteorological data with geospatial station metadata;
-- translating thermodynamic relationships into vectorised Python;
-- developing an interpretable residual-correction regression; and
-- deploying the fitted model as a lightweight browser tool.
-
-The main lesson is that elevation explains the pressure-driven density trend, while latitude captures much of the remaining climatic structure across Japan. Together, two readily available site descriptors provide a useful first estimate for wind-resource screening.
-
-## References
-
-- Japan Meteorological Agency, [Historical Weather Data Search](https://www.data.jma.go.jp/stats/etrn/).
-- Japan Meteorological Agency, [Past Weather Data Download: usage notes](https://www.data.jma.go.jp/risk/obsdl/).
-- Japan Meteorological Agency, [Surface Observation](https://www.jma.go.jp/jma/en/Activities/surf/surf.html).
-- Sako, S. (2024), [*How to Obtain Weather Data at Locations in Japan*](https://medium.com/@seimaosako/how-to-obtain-weather-data-at-locations-in-japan-12f478ec1b96).
-- Murray, F. W. (1967), [*On the Computation of Saturation Vapor Pressure*](https://doi.org/10.1175/1520-0450(1967)006%3C0203:OTCOSV%3E2.0.CO;2), *Journal of Applied Meteorology*, 6, 203–204.
-- Picard, A., Davis, R. S., Gläser, M. and Fujii, K. (2008), [*Revised formula for the density of moist air (CIPM-2007)*](https://doi.org/10.1088/0026-1394/45/2/004), *Metrologia*, 45, 149–155.
-- International Electrotechnical Commission, [IEC 61400-12-1:2022](https://webstore.iec.ch/en/publication/68499).
 
 *Method note: station counts, monthly row counts and fitted coefficients are saved-run results from the project notebook. JMA pages, schemas and observations may change. The chart and regression model are the author's derived work based on JMA observations.*
