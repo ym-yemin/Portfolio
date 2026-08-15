@@ -417,4 +417,80 @@ footer{padding:28px 0;border-top:1px solid var(--border)}.footer-inner{display:f
     padding-top: 115px;
   }
 
+
+  /* =========================================================
+   ARTICLE AND PROJECT CONTENT
+   ========================================================= */
+
+/* Markdown links */
+.article-body a,
+.project-body a {
+  color: #0969da;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.18em;
+  transition: color var(--transition);
+}
+
+.article-body a:hover,
+.project-body a:hover {
+  color: #0550ae;
+}
+
+html[data-theme="dark"] .article-body a,
+html[data-theme="dark"] .project-body a {
+  color: #58a6ff;
+}
+
+html[data-theme="dark"] .article-body a:hover,
+html[data-theme="dark"] .project-body a:hover {
+  color: #79c0ff;
+}
+
+
+/* Fenced code blocks */
+.article-body pre,
+.project-body pre {
+  margin: 1.8em 0;
+  padding: 1.2rem 1.3rem;
+  overflow-x: auto;
+
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+
+  background: #111827;
+  color: #e5edf6;
+
+  line-height: 1.6;
+  tab-size: 4;
+}
+
+.article-body pre code,
+.project-body pre code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88rem;
+}
+
+
+/* Inline code */
+.article-body :not(pre) > code,
+.project-body :not(pre) > code {
+  padding: 0.15em 0.38em;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background: var(--surface-soft);
+  color: var(--accent-hover);
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88em;
+}
+
 }
