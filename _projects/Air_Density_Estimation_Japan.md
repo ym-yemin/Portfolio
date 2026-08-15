@@ -46,7 +46,7 @@ Enter the latitude and elevation above mean sea level for a location in Japan. T
     </div>
 
     <div class="jma-density-tool__field">
-      <label for="jma-density-elevation">Elevation (m ASL)</label>
+      <label for="jma-density-elevation">Elevation above mean sea level (m)</label>
       <input id="jma-density-elevation" name="elevation" type="number" min="-10" max="4000" step="1" value="20" required>
     </div>
 
@@ -61,7 +61,7 @@ Enter the latitude and elevation above mean sea level for a location in Japan. T
       1.215 kg/m&sup3;
     </strong>
     <span class="jma-density-tool__detail" id="jma-density-detail">
-      Elevation: 20 m ASL | -0.8% vs 1.225 kg/m&sup3;
+      Elevation: 20 m MSL | -0.8% vs 1.225 kg/m&sup3;
     </span>
   </div>
 </div>
@@ -506,7 +506,6 @@ The residual from the elevation model is regressed against latitude:
 
 where *φ* is latitude in decimal degrees north. Latitude acts as a compact proxy for Japan's broad north–south temperature gradient.
 
-The two-stage implementation is intentionally transparent:
 
 ```python
 def fit_linear(x, y):
@@ -552,10 +551,5 @@ Combining the elevation model and latitude correction gives the final screening 
 ![Calculated and modelled long-term air density across JMA surface stations. The elevation-only result is shown on the left; the latitude-corrected result is shown on the right.](/assets/images/projects/jma-air-density-regression.png)
 
 *Monthly-derived long-term air density for 153 JMA surface stations, 2006–2025. Source: author's calculations based on Japan Meteorological Agency observations; the source data were processed and modelled by the author.*
-
-The final equation can estimate a long-term mean density from two readily available site descriptors. If the estimate is required at turbine hub height, use the target elevation above mean sea level:
-
-> **target elevation = ground elevation ASL + hub height AGL**
-
 
 *Method note: station counts, monthly row counts and fitted coefficients are saved-run results from the project notebook. JMA pages, schemas and observations may change. The chart and regression model are the author's derived work based on JMA observations.*
