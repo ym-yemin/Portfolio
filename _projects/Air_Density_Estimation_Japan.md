@@ -28,20 +28,11 @@ The result is an end-to-end Python workflow that:
 
 1. discovers observation stations from the Japan Meteorological Agency (JMA) station maps;
 2. collects monthly pressure, temperature and humidity observations;
-3. calculates humid-air density for every station-month;
-4. fits a transparent elevation-and-latitude regression model; and
-5. exposes the fitted model as an interactive screening tool on this page.
+3. calculates humid-air density for every station;
+4. develops a regression model that estimates long-term mean air density from elevation and latitude; and
+5. implements the model as an interactive tool for estimating air density at any location in Japan.
 
-The estimator provides a **long-term climatological value**, not the air density at a particular hour. It is intended for preliminary wind-resource screening, measurement planning and engineering reasonableness checks.
-
-## Project objectives
-
-- Build a reproducible catalogue of JMA observation stations.
-- Assemble a consistent monthly dataset across Japan.
-- Preserve station coordinates and elevation alongside the meteorological variables.
-- Calculate moist-air density from physical inputs rather than assuming a universal constant.
-- Quantify the effects of elevation and Japan's north–south climate gradient.
-- Package the fitted relationship as a simple tool for project screening.
+The estimator provides a **long-term climatological value**, and it is intended for preliminary wind-resource screening, measurement planning and engineering reasonableness checks.
 
 ## Workflow
 
@@ -63,14 +54,14 @@ Interactive latitude/elevation estimator
 
 ## 1. Building the station catalogue
 
-JMA's [historical weather-data selector](https://www.data.jma.go.jp/stats/etrn/) uses regional image maps. The underlying HTML contains the identifiers and metadata needed to turn the visual map into a structured station catalogue.
+JMA's <a href="https://www.data.jma.go.jp/stats/etrn/" target="_blank" rel="noopener noreferrer" style="color: #006fd6 !important; text-decoration: underline !important; font-weight: 600;">historical weather-data selector</a> uses regional image maps. The underlying HTML contains the identifiers and metadata needed to turn the visual map into a structured station catalogue.
 
 The two key identifiers are:
 
 - `prec_no`: JMA's regional code; and
 - `block_no`: the observation-station code.
 
-The station markup also provides the station name, latitude, longitude and elevation. The notebook follows the station-discovery idea outlined by [Seimao Sako](https://medium.com/@seimaosako/how-to-obtain-weather-data-at-locations-in-japan-12f478ec1b96), then adds geographic filtering, station typing and reusable metadata fields.
+The station markup also provides the station name, latitude, longitude and elevation. The notebook follows the station-discovery approach described in <a class="project-source-link" href="https://medium.com/@seimaosako/how-to-obtain-weather-data-at-locations-in-japan-12f478ec1b96" target="_blank" rel="noopener noreferrer">Sako-san's post, "How to Obtain Weather Data at Locations in Japan"</a>, then extends it with geographic filtering, station classification and reusable metadata fields.
 
 ```python
 import re
