@@ -2,7 +2,7 @@
 layout: project
 title: "Air Density Estimation Tool for Japan"
 date: 2026-07-01
-category: "Wind Energy Â· Data Analysis"
+category: "Wind Energy · Data Analysis"
 description: "Building a Japan-wide air-density screening tool from JMA monthly observations, Python data pipelines and regression modelling."
 tools:
   - Python
@@ -18,7 +18,7 @@ featured_image: /assets/images/projects/jma-air-density-regression.png
 
 ## Overview
 
-Japan's dense meteorological observation network is a valuable independent reference for wind-resource work. Wind speed and direction are the obvious variables, but pressure, temperature and humidity are also important because they determine air densityâ€”and therefore the kinetic power available in the wind.
+Japan's dense meteorological observation network is a valuable independent reference for wind-resource work. Wind speed and direction are the obvious variables, but pressure, temperature and humidity are also important because they determine air density—and therefore the kinetic power available in the wind.
 
 I developed this project to answer a practical early-stage question:
 
@@ -40,24 +40,24 @@ The estimator provides a **long-term climatological value**, not the air density
 - Assemble a consistent monthly dataset across Japan.
 - Preserve station coordinates and elevation alongside the meteorological variables.
 - Calculate moist-air density from physical inputs rather than assuming a universal constant.
-- Quantify the effects of elevation and Japan's northâ€“south climate gradient.
+- Quantify the effects of elevation and Japan's north–south climate gradient.
 - Package the fitted relationship as a simple tool for project screening.
 
 ## Workflow
 
 ```text
 JMA station maps
-      â†“
+      ↓
 Station catalogue: ID, type, latitude, longitude, elevation
-      â†“
-Monthly pressure, temperature and humidity: 2006â€“2025
-      â†“
+      ↓
+Monthly pressure, temperature and humidity: 2006–2025
+      ↓
 Humid-air density for each station-month
-      â†“
+      ↓
 Long-term station means
-      â†“
+      ↓
 Elevation model + latitude residual correction
-      â†“
+      ↓
 Interactive latitude/elevation estimator
 ```
 
@@ -225,7 +225,7 @@ JMA asks users to avoid excessive automated access. In practice, I use delays, c
 
 | Item | Result |
 | --- | ---: |
-| Period | 2006â€“2025 |
+| Period | 2006–2025 |
 | Surface stations used | 153 |
 | Station-years requested | 3,060 |
 | Station-month rows | 36,720 |
@@ -235,7 +235,7 @@ JMA asks users to avoid excessive automated access. In practice, I use delays, c
 
 Air density is calculated for each station-month before aggregation. For moist air:
 
-> **Ï = (p âˆ’ e) / (R<sub>d</sub>T) + e / (R<sub>v</sub>T)**
+> **ρ = (p − e) / (R<sub>d</sub>T) + e / (R<sub>v</sub>T)**
 
 where *p* is local pressure, *e* is water-vapour partial pressure, *T* is absolute temperature, and *R*<sub>d</sub> and *R*<sub>v</sub> are the specific gas constants for dry air and water vapour.
 
@@ -270,7 +270,7 @@ monthly["density_kg_m3"] = humid_air_density(
 )
 ```
 
-Monthly densities are averaged into station-year means and then into a 2006â€“2025 long-term mean for each station:
+Monthly densities are averaged into station-year means and then into a 2006–2025 long-term mean for each station:
 
 ```python
 annual = (
@@ -298,19 +298,19 @@ long_term = (
 
 Elevation captures the primary pressure effect. The first linear regression relates long-term density to station elevation:
 
-> **ÏÌ‚<sub>elevation</sub> = 1.21746 âˆ’ 0.000110927z**
+> **ρ̂<sub>elevation</sub> = 1.21746 − 0.000110927z**
 
-where *z* is elevation in metres. Within the fitted station range, the coefficient corresponds to approximately **0.0111 kg/mÂ³ less density per 100 m of elevation**.
+where *z* is elevation in metres. Within the fitted station range, the coefficient corresponds to approximately **0.0111 kg/m³ less density per 100 m of elevation**.
 
-The elevation-only model produces **RÂ² = 0.5775**. Elevation explains the dominant pressure trend, but the remaining error has a clear geographic pattern.
+The elevation-only model produces **R² = 0.5775**. Elevation explains the dominant pressure trend, but the remaining error has a clear geographic pattern.
 
 ### Stage 2: latitude correction
 
 The residual from the elevation model is regressed against latitude:
 
-> **residual = âˆ’0.14008 + 0.00392261Ï†**
+> **residual = −0.14008 + 0.00392261φ**
 
-where *Ï†* is latitude in decimal degrees north. Latitude acts as a compact proxy for Japan's broad northâ€“south temperature gradient.
+where *φ* is latitude in decimal degrees north. Latitude acts as a compact proxy for Japan's broad north–south temperature gradient.
 
 The two-stage implementation is intentionally transparent:
 
@@ -348,16 +348,16 @@ final_r2 = 1 - np.sum((density - final_prediction) ** 2) / np.sum(
 
 Combining the elevation model and latitude correction gives the final screening equation:
 
-> **ÏÌ‚ = 1.07738 + 0.00392261Ï† âˆ’ 0.000110927z**
+> **ρ̂ = 1.07738 + 0.00392261φ − 0.000110927z**
 
-| Model | Inputs | RÂ² |
+| Model | Inputs | R² |
 | --- | --- | ---: |
 | Stage 1 | Elevation | 0.5775 |
 | Final model | Elevation + latitude correction | 0.9824 |
 
 ![Calculated and modelled long-term air density across JMA surface stations. The elevation-only result is shown on the left; the latitude-corrected result is shown on the right.](/assets/images/projects/jma-air-density-regression.png)
 
-*Monthly-derived long-term air density for 153 JMA surface stations, 2006â€“2025. Source: author's calculations based on Japan Meteorological Agency observations; the source data were processed and modelled by the author.*
+*Monthly-derived long-term air density for 153 JMA surface stations, 2006–2025. Source: author's calculations based on Japan Meteorological Agency observations; the source data were processed and modelled by the author.*
 
 The final equation can estimate a long-term mean density from two readily available site descriptors. If the estimate is required at turbine hub height, use the target elevation above mean sea level:
 
@@ -365,12 +365,12 @@ The final equation can estimate a long-term mean density from two readily availa
 
 ## Try the air-density estimator
 
-Enter a latitude and elevation for a location in Japan. Hub height is optional. The calculator applies the fitted monthly 2006â€“2025 regression equation shown above.
+Enter a latitude and elevation for a location in Japan. Hub height is optional. The calculator applies the fitted monthly 2006–2025 regression equation shown above.
 
 <div class="jma-density-tool" id="jma-density-tool">
   <form class="jma-density-tool__form" id="jma-density-form">
     <div class="jma-density-tool__field">
-      <label for="jma-density-latitude">Latitude (Â°N)</label>
+      <label for="jma-density-latitude">Latitude (°N)</label>
       <input id="jma-density-latitude" name="latitude" type="number" min="20" max="46" step="0.0001" value="35.6817" required>
     </div>
     <div class="jma-density-tool__field">
@@ -385,7 +385,7 @@ Enter a latitude and elevation for a location in Japan. Hub height is optional. 
   </form>
   <div class="jma-density-tool__result" id="jma-density-result" aria-live="polite">
     <span class="jma-density-tool__eyebrow">Estimated long-term mean</span>
-    <strong class="jma-density-tool__value" id="jma-density-value">1.201 kg/mÂ³</strong>
+    <strong class="jma-density-tool__value" id="jma-density-value">1.201 kg/m³</strong>
     <span class="jma-density-tool__detail" id="jma-density-detail">Target elevation: 150 m ASL</span>
   </div>
 </div>
@@ -525,7 +525,7 @@ Enter a latitude and elevation for a location in Japan. Hub height is optional. 
       if (!inputIsValid) {
         result.classList.add("jma-density-tool__result--error");
         value.textContent = "Check the input values";
-        detail.textContent = "Use 20â€“46Â°N and a target elevation no higher than 4,000 m.";
+        detail.textContent = "Use 20–46°N and a target elevation no higher than 4,000 m.";
         return;
       }
 
@@ -536,13 +536,13 @@ Enter a latitude and elevation for a location in Japan. Hub height is optional. 
       var differenceText = differenceFromStandard >= 0 ? "+" : "";
 
       result.classList.remove("jma-density-tool__result--error");
-      value.textContent = density.toFixed(3) + " kg/mÂ³";
+      value.textContent = density.toFixed(3) + " kg/m³";
       detail.textContent = "Target elevation: "
         + targetElevation.toFixed(0)
-        + " m ASL Â· "
+        + " m ASL · "
         + differenceText
         + differenceFromStandard.toFixed(1)
-        + "% vs 1.225 kg/mÂ³";
+        + "% vs 1.225 kg/m³";
     }
 
     form.addEventListener("submit", calculate);
@@ -552,7 +552,7 @@ Enter a latitude and elevation for a location in Japan. Hub height is optional. 
 
 ### Using the result
 
-The tool returns the modelled 2006â€“2025 long-term mean density in kg/mÂ³. It can support early-stage comparisons and provide an initial assumption before site measurements are available. It does not replace simultaneous pressure, temperature and humidity measurements for turbine power-performance or bankable energy-yield analysis.
+The tool returns the modelled 2006–2025 long-term mean density in kg/m³. It can support early-stage comparisons and provide an initial assumption before site measurements are available. It does not replace simultaneous pressure, temperature and humidity measurements for turbine power-performance or bankable energy-yield analysis.
 
 ## Project outcome
 
@@ -574,8 +574,8 @@ The main lesson is that elevation explains the pressure-driven density trend, wh
 - Japan Meteorological Agency, [Past Weather Data Download: usage notes](https://www.data.jma.go.jp/risk/obsdl/).
 - Japan Meteorological Agency, [Surface Observation](https://www.jma.go.jp/jma/en/Activities/surf/surf.html).
 - Sako, S. (2024), [*How to Obtain Weather Data at Locations in Japan*](https://medium.com/@seimaosako/how-to-obtain-weather-data-at-locations-in-japan-12f478ec1b96).
-- Murray, F. W. (1967), [*On the Computation of Saturation Vapor Pressure*](https://doi.org/10.1175/1520-0450(1967)006%3C0203:OTCOSV%3E2.0.CO;2), *Journal of Applied Meteorology*, 6, 203â€“204.
-- Picard, A., Davis, R. S., GlÃ¤ser, M. and Fujii, K. (2008), [*Revised formula for the density of moist air (CIPM-2007)*](https://doi.org/10.1088/0026-1394/45/2/004), *Metrologia*, 45, 149â€“155.
+- Murray, F. W. (1967), [*On the Computation of Saturation Vapor Pressure*](https://doi.org/10.1175/1520-0450(1967)006%3C0203:OTCOSV%3E2.0.CO;2), *Journal of Applied Meteorology*, 6, 203–204.
+- Picard, A., Davis, R. S., Gläser, M. and Fujii, K. (2008), [*Revised formula for the density of moist air (CIPM-2007)*](https://doi.org/10.1088/0026-1394/45/2/004), *Metrologia*, 45, 149–155.
 - International Electrotechnical Commission, [IEC 61400-12-1:2022](https://webstore.iec.ch/en/publication/68499).
 
 *Method note: station counts, monthly row counts and fitted coefficients are saved-run results from the project notebook. JMA pages, schemas and observations may change. The chart and regression model are the author's derived work based on JMA observations.*
