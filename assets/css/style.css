@@ -417,8 +417,10 @@ footer{padding:28px 0;border-top:1px solid var(--border)}.footer-inner{display:f
     padding-top: 115px;
   }
 
+}
 
-  /* =========================================================
+
+/* =========================================================
    ARTICLE AND PROJECT CONTENT
    ========================================================= */
 
@@ -491,6 +493,4 @@ html[data-theme="dark"] .project-body a:hover {
 
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.88em;
-}
-
 }
