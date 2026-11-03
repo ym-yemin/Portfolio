@@ -15,6 +15,8 @@ const loginForm = document.getElementById("jpLoginForm");
 const loginStatus = document.getElementById("jpLoginStatus");
 const signOut = document.getElementById("jpSignOut");
 const userEmail = document.getElementById("jpUserEmail");
+const createAccount = document.getElementById("jpCreateAccount");
+const OWNER_EMAIL = "iemin.ym@gmail.com";
 
 let currentUser = null;
 let queue = [];
@@ -75,6 +77,45 @@ loginForm?.addEventListener("submit", async (event) => {
 
   const { error } = await supabase.auth.signInWithPassword({ email, password });
   loginStatus.textContent = error ? error.message : "";
+});
+
+createAccount?.addEventListener("click", async () => {
+  if (!supabase) return;
+
+  const email = document.getElementById("jpEmail").value.trim().toLowerCase();
+  const password = document.getElementById("jpPassword").value;
+
+  if (email !== OWNER_EMAIL) {
+    loginStatus.textContent = "This email is not approved for first-time account creation.";
+    return;
+  }
+
+  if (password.length < 8) {
+    loginStatus.textContent = "Choose a password with at least 8 characters.";
+    return;
+  }
+
+  loginStatus.textContent = "Creating your account…";
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: "https://yeminn.com/japanese/"
+    }
+  });
+
+  if (error) {
+    loginStatus.textContent = error.message;
+    return;
+  }
+
+  if (data.session) {
+    loginStatus.textContent = "";
+    await setAuthState(data.session);
+  } else {
+    loginStatus.textContent = "Account created. Check your email to confirm it, then return here and sign in.";
+  }
 });
 
 signOut?.addEventListener("click", async () => {
