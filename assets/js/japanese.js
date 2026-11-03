@@ -21,17 +21,39 @@ let queue = [];
 let currentIndex = 0;
 let reviewedThisSession = 0;
 
-function setAuthState(session) {
+async function setAuthState(session) {
   currentUser = session?.user || null;
-  authCard?.classList.toggle("hidden", Boolean(currentUser));
-  privateApp?.classList.toggle("hidden", !currentUser);
-  if (userEmail) userEmail.textContent = currentUser?.email || "";
-  if (currentUser && app?.dataset.jpView === "deck") loadDeck();
+
+  if (!currentUser) {
+    authCard?.classList.remove("hidden");
+    privateApp?.classList.add("hidden");
+    if (userEmail) userEmail.textContent = "";
+    return;
+  }
+
+  const { data: accessRow, error: accessError } = await supabase
+    .from("japanese_access")
+    .select("user_id")
+    .eq("user_id", currentUser.id)
+    .maybeSingle();
+
+  if (accessError || !accessRow) {
+    await supabase.auth.signOut();
+    authCard?.classList.remove("hidden");
+    privateApp?.classList.add("hidden");
+    if (loginStatus) loginStatus.textContent = "This account is not approved for the Japanese study area.";
+    return;
+  }
+
+  authCard?.classList.add("hidden");
+  privateApp?.classList.remove("hidden");
+  if (userEmail) userEmail.textContent = currentUser.email || "";
+  if (app?.dataset.jpView === "deck") loadDeck();
 }
 
 if (!configured) {
   if (loginStatus) {
-    loginStatus.textContent = "Setup required: add your Supabase URL and anon key in assets/js/japanese.js.";
+    loginStatus.textContent = "Setup required: add your Supabase URL and publishable key in assets/js/japanese.js.";
   }
   loginForm?.querySelector("button")?.setAttribute("disabled", "disabled");
 } else {
