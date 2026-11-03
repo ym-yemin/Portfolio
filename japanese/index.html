@@ -1,0 +1,109 @@
+---
+layout: default
+title: Japanese
+description: Private Japanese spaced-repetition study area.
+permalink: /japanese/
+noindex: true
+extra_css: /assets/css/japanese.css
+extra_js: /assets/js/japanese.js
+extra_js_module: true
+---
+
+<main class="jp-app" data-jp-view="dashboard">
+  <section class="jp-shell container">
+    <div class="jp-auth-card" id="jpAuthCard">
+      <div class="eyebrow">Private study area</div>
+      <h1>Japanese</h1>
+      <p class="jp-muted">Sign in with an approved email and password to access your flashcards and review progress.</p>
+
+      <form class="jp-login-form" id="jpLoginForm">
+        <label>
+          Email
+          <input type="email" id="jpEmail" autocomplete="email" required />
+        </label>
+        <label>
+          Password
+          <input type="password" id="jpPassword" autocomplete="current-password" required />
+        </label>
+        <button class="button button-primary" type="submit">Sign in</button>
+        <p class="jp-form-status" id="jpLoginStatus" role="status"></p>
+      </form>
+    </div>
+
+    <div class="jp-private hidden" id="jpPrivateApp">
+      <header class="jp-page-header">
+        <div>
+          <div class="eyebrow">Japanese study</div>
+          <h1>Spaced repetition.</h1>
+          <p class="jp-muted">Choose a JLPT level and study area. Review progress is saved separately for each approved user.</p>
+        </div>
+        <div class="jp-user-actions">
+          <span class="jp-user-email" id="jpUserEmail"></span>
+          <button class="button" type="button" id="jpSignOut">Sign out</button>
+        </div>
+      </header>
+
+      <div class="jp-level-grid" aria-label="JLPT levels">
+        <button class="jp-level-card is-active" type="button" data-level="N1">
+          <span>N1</span>
+          <small>Advanced</small>
+        </button>
+        <button class="jp-level-card" type="button" disabled>
+          <span>N2</span>
+          <small>Coming next</small>
+        </button>
+        <button class="jp-level-card" type="button" disabled>
+          <span>N3</span>
+          <small>Coming next</small>
+        </button>
+        <button class="jp-level-card" type="button" disabled>
+          <span>N4</span>
+          <small>Coming next</small>
+        </button>
+        <button class="jp-level-card" type="button" disabled>
+          <span>N5</span>
+          <small>Coming next</small>
+        </button>
+      </div>
+
+      <section class="jp-section-block">
+        <div class="jp-section-heading">
+          <div>
+            <span class="jp-section-kicker">N1</span>
+            <h2>Study areas</h2>
+          </div>
+          <p class="jp-muted">Vocabulary, Kanji and Grammar are kept separate so each can use the most suitable card format later.</p>
+        </div>
+
+        <div class="jp-topic-grid">
+          <article class="jp-topic-card is-disabled">
+            <span class="jp-topic-icon">語</span>
+            <div>
+              <h3>Vocabulary</h3>
+              <p>Word meaning, reading and usage.</p>
+              <span class="jp-coming">Coming soon</span>
+            </div>
+          </article>
+
+          <a class="jp-topic-card" href="{{ '/japanese/n1/kanji/week1-day3/' | relative_url }}">
+            <span class="jp-topic-icon">漢</span>
+            <div>
+              <h3>Kanji</h3>
+              <p>Reading, meaning and compounds.</p>
+              <span class="jp-topic-link">Open N1 Kanji →</span>
+            </div>
+          </a>
+
+          <article class="jp-topic-card is-disabled">
+            <span class="jp-topic-icon">文</span>
+            <div>
+              <h3>Grammar</h3>
+              <p>Patterns, meaning and sentence recall.</p>
+              <span class="jp-coming">Coming soon</span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
