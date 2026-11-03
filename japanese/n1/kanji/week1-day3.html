@@ -1,0 +1,107 @@
+---
+layout: default
+title: N1 Kanji — Week 1, Day 3
+description: Private N1 Kanji spaced-repetition deck.
+permalink: /japanese/n1/kanji/week1-day3/
+noindex: true
+extra_css: /assets/css/japanese.css
+extra_js: /assets/js/japanese.js
+extra_js_module: true
+---
+
+<main class="jp-app" data-jp-view="deck" data-deck-slug="n1-kanji-week1-day3">
+  <section class="jp-shell container">
+    <div class="jp-auth-card" id="jpAuthCard">
+      <div class="eyebrow">Private study area</div>
+      <h1>N1 Kanji</h1>
+      <p class="jp-muted">Sign in to continue your Week 1, Day 3 review.</p>
+
+      <form class="jp-login-form" id="jpLoginForm">
+        <label>
+          Email
+          <input type="email" id="jpEmail" autocomplete="email" required />
+        </label>
+        <label>
+          Password
+          <input type="password" id="jpPassword" autocomplete="current-password" required />
+        </label>
+        <button class="button button-primary" type="submit">Sign in</button>
+        <button class="button" type="button" id="jpCreateAccount">Create account</button>
+        <p class="jp-form-status" id="jpLoginStatus" role="status"></p>
+      </form>
+    </div>
+
+    <div class="jp-private hidden" id="jpPrivateApp">
+      <div class="jp-deck-topbar">
+        <a href="{{ '/japanese/' | relative_url }}" class="jp-back-link">← Japanese</a>
+        <div class="jp-user-actions">
+          <span class="jp-user-email" id="jpUserEmail"></span>
+          <button class="button" type="button" id="jpSignOut">Sign out</button>
+        </div>
+      </div>
+
+      <header class="jp-deck-header">
+        <div>
+          <div class="eyebrow">N1 · Kanji · Week 1 · Day 3</div>
+          <h1>講・構・購</h1>
+          <p class="jp-muted">総まとめ N1 漢字 — 同じ部分・同じ音読みをもつ漢字. Recall the reading first, then reveal the answer and rate the card.</p>
+        </div>
+
+        <div class="jp-deck-stats">
+          <div><strong id="jpDueCount">0</strong><span>Due</span></div>
+          <div><strong id="jpNewCount">0</strong><span>New</span></div>
+          <div><strong id="jpReviewedCount">0</strong><span>Reviewed</span></div>
+        </div>
+      </header>
+
+      <div class="jp-empty hidden" id="jpDeckEmpty">
+        <h2>All caught up.</h2>
+        <p class="jp-muted">There are no cards due right now. Your next review will appear here when it is scheduled.</p>
+      </div>
+
+      <section class="jp-study-area hidden" id="jpStudyArea">
+        <div class="jp-progress-row">
+          <span id="jpProgressText">Card 1</span>
+          <div class="jp-progress-track"><span id="jpProgressBar"></span></div>
+        </div>
+
+        <article class="jp-flashcard" id="jpFlashcard">
+          <div class="jp-card-front">
+            <span class="jp-card-label" id="jpCardGroup">Reading</span>
+            <div class="jp-card-word" id="jpCardWord">—</div>
+            <p class="jp-card-prompt">What is the reading and meaning?</p>
+          </div>
+
+          <div class="jp-card-answer hidden" id="jpCardAnswer">
+            <div class="jp-answer-reading" id="jpCardReading"></div>
+            <div class="jp-answer-meaning" id="jpCardMeaning"></div>
+            <div class="jp-answer-note" id="jpCardNote"></div>
+          </div>
+        </article>
+
+        <button class="button button-primary jp-show-answer" type="button" id="jpShowAnswer">Show answer</button>
+
+        <div class="jp-rating-grid hidden" id="jpRatingGrid" aria-label="Rate recall">
+          <button type="button" class="jp-rating again" data-rating="again">
+            <strong>Again</strong>
+            <span>10 min</span>
+          </button>
+          <button type="button" class="jp-rating hard" data-rating="hard">
+            <strong>Hard</strong>
+            <span>1 day</span>
+          </button>
+          <button type="button" class="jp-rating good" data-rating="good">
+            <strong>Good</strong>
+            <span>Normal</span>
+          </button>
+          <button type="button" class="jp-rating easy" data-rating="easy">
+            <strong>Easy</strong>
+            <span>Longer</span>
+          </button>
+        </div>
+
+        <p class="jp-keyboard-hint">Keyboard: Space = reveal · 1 = Again · 2 = Hard · 3 = Good · 4 = Easy</p>
+      </section>
+    </div>
+  </section>
+</main>

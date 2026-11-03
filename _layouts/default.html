@@ -6,7 +6,9 @@
   <title>{% if page.title and page.title != 'Home' %}{{ page.title }} | {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description | escape }}" />
   <meta name="theme-color" content="#0b0f14" />
+  {% if page.noindex %}<meta name="robots" content="noindex,nofollow,noarchive" />{% endif %}
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" />
+  {% if page.extra_css %}<link rel="stylesheet" href="{{ page.extra_css | relative_url }}" />{% endif %}
 </head>
 <body>
   <header class="site-header" id="siteHeader">
@@ -54,5 +56,6 @@
   </footer>
 
   <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  {% if page.extra_js %}<script{% if page.extra_js_module %} type="module"{% endif %} src="{{ page.extra_js | relative_url }}"></script>{% endif %}
 </body>
 </html>
