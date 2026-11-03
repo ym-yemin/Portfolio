@@ -1,12 +1,12 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
 // Fill these two values after creating your Supabase project.
-// The anon key is designed to be used in browser apps; security is enforced by RLS.
-const SUPABASE_URL = "YOUR_SUPABASE_URL";
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+// The publishable key is designed to be used in browser apps; security is enforced by RLS.
+const SUPABASE_URL = "https://upsvzhbvjqrpuqtvekdo.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_x9zkWCGyYcdHan_mmOXwsA_sPzxXbwH";
 
-const configured = !SUPABASE_URL.startsWith("YOUR_") && !SUPABASE_ANON_KEY.startsWith("YOUR_");
-const supabase = configured ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+const configured = !SUPABASE_URL.startsWith("YOUR_") && !SUPABASE_PUBLISHABLE_KEY.startsWith("YOUR_");
+const supabase = configured ? createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY) : null;
 
 const app = document.querySelector(".jp-app");
 const authCard = document.getElementById("jpAuthCard");
