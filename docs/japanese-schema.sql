@@ -1,7 +1,13 @@
 -- Japanese study app schema for Supabase
--- Run in Supabase SQL Editor once.
+-- Run once in the Supabase SQL Editor.
 
 create extension if not exists pgcrypto;
+
+create table if not exists public.japanese_access (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  granted_at timestamptz not null default now(),
+  note text
+);
 
 create table if not exists public.japanese_cards (
   id uuid primary key default gen_random_uuid(),
@@ -37,37 +43,88 @@ create index if not exists japanese_cards_deck_idx
 create index if not exists japanese_progress_due_idx
   on public.japanese_user_progress(user_id, due_at);
 
+alter table public.japanese_access enable row level security;
 alter table public.japanese_cards enable row level security;
 alter table public.japanese_user_progress enable row level security;
 
-drop policy if exists "authenticated users can read japanese cards" on public.japanese_cards;
-create policy "authenticated users can read japanese cards"
-on public.japanese_cards
-for select
-to authenticated
-using (true);
+-- Harden table privileges. Signed-out visitors get nothing.
+revoke all on table public.japanese_access from anon, authenticated;
+revoke all on table public.japanese_cards from anon, authenticated;
+revoke all on table public.japanese_user_progress from anon, authenticated;
 
-drop policy if exists "users can read own japanese progress" on public.japanese_user_progress;
-create policy "users can read own japanese progress"
-on public.japanese_user_progress
+grant select on table public.japanese_access to authenticated;
+grant select on table public.japanese_cards to authenticated;
+grant select, insert, update on table public.japanese_user_progress to authenticated;
+
+drop policy if exists "users can verify own japanese access" on public.japanese_access;
+create policy "users can verify own japanese access"
+on public.japanese_access
 for select
 to authenticated
 using (auth.uid() = user_id);
 
-drop policy if exists "users can insert own japanese progress" on public.japanese_user_progress;
-create policy "users can insert own japanese progress"
+drop policy if exists "approved users can read japanese cards" on public.japanese_cards;
+create policy "approved users can read japanese cards"
+on public.japanese_cards
+for select
+to authenticated
+using (
+  exists (
+    select 1
+    from public.japanese_access a
+    where a.user_id = auth.uid()
+  )
+);
+
+drop policy if exists "approved users can read own japanese progress" on public.japanese_user_progress;
+create policy "approved users can read own japanese progress"
+on public.japanese_user_progress
+for select
+to authenticated
+using (
+  auth.uid() = user_id
+  and exists (
+    select 1
+    from public.japanese_access a
+    where a.user_id = auth.uid()
+  )
+);
+
+drop policy if exists "approved users can insert own japanese progress" on public.japanese_user_progress;
+create policy "approved users can insert own japanese progress"
 on public.japanese_user_progress
 for insert
 to authenticated
-with check (auth.uid() = user_id);
+with check (
+  auth.uid() = user_id
+  and exists (
+    select 1
+    from public.japanese_access a
+    where a.user_id = auth.uid()
+  )
+);
 
-drop policy if exists "users can update own japanese progress" on public.japanese_user_progress;
-create policy "users can update own japanese progress"
+drop policy if exists "approved users can update own japanese progress" on public.japanese_user_progress;
+create policy "approved users can update own japanese progress"
 on public.japanese_user_progress
 for update
 to authenticated
-using (auth.uid() = user_id)
-with check (auth.uid() = user_id);
+using (
+  auth.uid() = user_id
+  and exists (
+    select 1
+    from public.japanese_access a
+    where a.user_id = auth.uid()
+  )
+)
+with check (
+  auth.uid() = user_id
+  and exists (
+    select 1
+    from public.japanese_access a
+    where a.user_id = auth.uid()
+  )
+);
 
--- Intentionally no INSERT/UPDATE/DELETE policy for japanese_cards.
--- Add study material only through the Supabase dashboard / SQL editor.
+-- No client INSERT/UPDATE/DELETE grants are given for japanese_cards or japanese_access.
+-- Add cards and grant users only from the Supabase dashboard / SQL editor.
